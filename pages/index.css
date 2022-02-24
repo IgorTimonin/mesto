@@ -1,7 +1,34 @@
 .page {
-    background-color: #000;
+  background-color: #000;
+  margin: 0 200px;
+}
+
+.header {
+  padding-top: 45px;
+  padding-bottom: 41px;
+  display: flex;
+  border-bottom: 1px solid #545454;
 }
 
 .header__logo {
-    background-image: url(/images/logo_Mesto.svg);
+  background-image: url(/images/logo_Mesto.svg);
+  background-repeat: no-repeat;
+  min-width: 142px;
+  min-height: 33px;
+  align-self: flex-start;
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+
+.profile__avatar {
+  width: 120px;
+  border-radius: 50%;
+  margin-right: 30px;
 }
