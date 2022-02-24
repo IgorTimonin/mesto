@@ -1,0 +1,7 @@
+.page {
+    background-color: #000;
+}
+
+.header__logo {
+    background-image: url(/images/logo_Mesto.svg);
+}
