@@ -73,23 +73,21 @@
 
 .profile__edit-btn {
   padding: 0;
-  margin: 0 18px;
+  margin: 0 5px 0 25px;
   background-color: #000;
   background-image: url(/images/pencil.svg);
   background-position: center;
   background-repeat: no-repeat;
   width: 24px;
   min-height: 24px;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
   box-sizing: border-box;
 }
 
 .profile__content {
-
 }
 
 .profile__add-btn {
-  /* align-self: flex-end; */
   padding: 0;
   background-color: #000;
   background-image: url(/images/plus.svg);
@@ -97,17 +95,17 @@
   background-repeat: no-repeat;
   min-width: 150px;
   height: 50px;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #ffffff;
   box-sizing: border-box;
   border-radius: 2px;
 }
 
 .gallery {
-
-
+  padding-bottom: 67px;
 }
 
 .gallery__cards {
+  margin: 0;
   padding: 0;
   display: grid;
   justify-items: center;
@@ -117,32 +115,61 @@
 
 .gallery__item {
   max-height: 360px;
+  max-width: 282px;
   background-color: #fff;
   border-radius: 10px;
+  overflow: hidden;
+  font-size: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gallery__img {
+}
+
+.gallery__title {
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .gallery__text {
+  margin: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-between;
   font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
-  padding: 25px 0;
+  padding: 25px 0 31px 21px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .gallary__like-btn {
   padding: 0;
-  margin: 0 18px;
+  margin: 0 30px 0 10px;
   background-color: #fff;
   background-image: url(/images/heart.svg);
   background-position: center;
   background-repeat: no-repeat;
-  width: 22px;
+  min-width: 24px;
   min-height: 19px;
   border: none;
   box-sizing: border-box;
+}
+
+.footer__copyright {
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+  margin: 0;
 }
