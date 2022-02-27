@@ -6,8 +6,7 @@
   box-sizing: border-box;
   font-family: "Inter", "Arial", "Helvetica", sans-serif;
   text-rendering: optimizeLegibility;
-  max-width: 1280px;
-  padding: 0 200px;
+  max-width: 880px;
 }
 
 .header {
@@ -17,12 +16,26 @@
   border-bottom: 1px solid #545454;
 }
 
+@media screen and (max-width: 945px) {
+  .header {
+    padding: 28px 0 32px 27px;
+  }
+}
+
 .header__logo {
   background-image: url(../images/logo_Mesto.svg);
   background-repeat: no-repeat;
   min-width: 142px;
   min-height: 33px;
   align-self: flex-start;
+}
+
+@media screen and (max-width: 597px) {
+  .header__logo {
+    min-width: 104px;
+    min-height: 25px;
+    background-size: contain;
+  }
 }
 
 .profile {
@@ -36,6 +49,20 @@
   padding: 40px 0 51px;
 }
 
+@media screen and (max-width: 945px) {
+  .profile {
+    padding: 40px 19px 51px;
+  }
+}
+
+@media screen and (max-width: 597px) {
+  .profile {
+    flex-direction: column;
+    flex-basis: 0;
+    padding: 37px 0;
+  }
+}
+
 .profile__info {
   display: flex;
   flex-direction: row;
@@ -44,10 +71,26 @@
   flex-basis: 580px;
 }
 
+@media screen and (max-width: 597px) {
+  .profile__info {
+    /* flex-direction: column; */
+    flex-basis: 0;
+    padding: 23px 0 36px;
+    align-items: baseline;
+    justify-content: center;
+  }
+}
+
 .profile__avatar {
   width: 120px;
   border-radius: 50%;
   margin-right: 30px;
+}
+
+@media screen and (max-width: 597px) {
+  .profile__avatar {
+    margin: 0;
+  }
 }
 
 .profile__name {
@@ -58,6 +101,21 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
+}
+
+@media screen and (max-width: 700px) {
+  .profile__name {
+    font-size: 4.8vw;
+    line-height: 33px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 597px) {
+  .profile__name {
+    font-size: 27px;
+    padding-bottom: 14px;
+  }
 }
 
 .profile__occupation {
@@ -71,6 +129,14 @@
   width: 100%;
 }
 
+@media screen and (max-width: 597px) {
+  .profile__occupation {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
+}
+
 .profile__edit-btn {
   padding: 0;
   margin: 0 5px 0 25px;
@@ -82,9 +148,21 @@
   min-height: 24px;
   border: 1px solid #ffffff;
   box-sizing: border-box;
+  transition: linear 0.3s;
 }
 
-.profile__content {
+@media screen and (max-width: 945px) {
+  .profile__edit-btn {
+    width: 18px;
+    min-height: 18px;
+    margin-left: 15px;
+  }
+}
+
+@media screen and (max-width: 597px) {
+  .profile__edit-btn {
+    margin-left: 10px;
+  }
 }
 
 .profile__add-btn {
@@ -94,14 +172,17 @@
   background-position: center;
   background-repeat: no-repeat;
   min-width: 150px;
-  height: 50px;
+  min-height: 50px;
   border: 2px solid #ffffff;
   box-sizing: border-box;
   border-radius: 2px;
+  transition: linear 0.3s;
 }
 
-.gallery {
-  padding-bottom: 67px;
+@media screen and (max-width: 597px) {
+  .profile__add-btn {
+    min-width: 282px;
+  }
 }
 
 .gallery__cards {
@@ -111,8 +192,13 @@
   justify-items: center;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 282px);
-  /* grid-template-columns: repeat(auto-fit, minmax(282px, 1fr)); */
   gap: 17px;
+}
+
+@media screen and (max-width: 597px) {
+  .gallery__cards {
+    gap: 20px;
+  }
 }
 
 .gallery__item {
@@ -124,9 +210,6 @@
   font-size: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.gallery__img {
 }
 
 .gallery__title {
@@ -160,10 +243,11 @@
   background-image: url(../images/heart.svg);
   background-position: center;
   background-repeat: no-repeat;
-  min-width: 24px;
+  min-width: 22px;
   min-height: 19px;
   border: none;
   box-sizing: border-box;
+  transition: linear 0.3s;
 }
 
 .gallary__like-btn_active {
@@ -178,6 +262,13 @@
   line-height: 22px;
   color: #545454;
   margin: 0;
+  padding-top: 67px;
+}
+
+@media screen and (max-width: 945px) {
+  .footer__copyright {
+    padding: 48px 19px 36px;
+  }
 }
 
 .btn_hover:hover {
