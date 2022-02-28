@@ -7,6 +7,7 @@ let profileOccupation = document.querySelector('.profile__occupation')
 let inputName = document.querySelector('.popup__profile-name')
 let inputOccupation = document.querySelector('.popup__profile-occupation')
 let likeBtn = document.querySelectorAll('.gallery__like-btn')
+let name = 'ВВедите имя';
 
 console.log(likeBtn);
 
@@ -28,6 +29,12 @@ closePopup.addEventListener('click', togglePopup);
 function inputProfileInfo() {
   profileName.textContent = inputName.value;
   profileOccupation.textContent = inputOccupation.value;
+  if (inputName.value.length < 1) {
+    profileName.textContent = 'Укажите имя';
+  }
+  if (inputOccupation.value.length < 1) {
+    profileOccupation.textContent = 'Чем вы занимаетесь?';
+  }
   togglePopup();
 };
 saveBtn.addEventListener('click', inputProfileInfo);
