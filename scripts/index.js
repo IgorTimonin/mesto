@@ -1,12 +1,14 @@
 const popup = document.querySelector('.popup');
 const openPopup = document.querySelector('.profile__edit-btn');
 const closePopup = popup.querySelector('.popup__btn-close');
-const likeBtn = document.querySelectorAll('.gallery__like-btn')
-const saveBtn = document.querySelector('.popup__btn-save');
+let saveBtn = document.querySelector('.popup__btn-save');
 let profileName = document.querySelector('.profile__name')
 let profileOccupation = document.querySelector('.profile__occupation')
 let inputName = document.querySelector('.popup__profile-name')
 let inputOccupation = document.querySelector('.popup__profile-occupation')
+let likeBtn = document.querySelectorAll('.gallery__like-btn')
+
+console.log(likeBtn);
 
 function togglePopup() {
   popup.classList.toggle('popup__opened');
@@ -26,14 +28,12 @@ closePopup.addEventListener('click', togglePopup);
 function inputProfileInfo() {
   profileName.textContent = inputName.value;
   profileOccupation.textContent = inputOccupation.value;
+  togglePopup();
 };
 saveBtn.addEventListener('click', inputProfileInfo);
 
-// function toggleLike() {
-//   console.log('Like click!');
-//   likeBtn.classList.toggle('gallery__like-btn_active');
-// };
-
-// likeBtn.addEventListener('click', toggleLike);
-
-
+for (let i = 0; i < likeBtn.length; i++) {
+  likeBtn[i].onclick = function () {
+    this.classList.toggle('gallery__like-btn_active');
+  }
+}
