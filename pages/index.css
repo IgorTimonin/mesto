@@ -245,7 +245,7 @@
   overflow: hidden;
 }
 
-.gallary__like-btn {
+.gallery__like-btn {
   padding: 0;
   margin: 0 30px 0 10px;
   background-color: #fff;
@@ -259,7 +259,7 @@
   transition: linear 0.3s;
 }
 
-.gallary__like-btn_active {
+.gallery__like-btn_active {
   background-image: url(../images/heart_black.svg);
 }
 
@@ -396,7 +396,7 @@
   color: #000;
 }
 
-.popup__btn-submit {
+.popup__btn-save {
   align-self: center;
   width: 358px;
   height: 50px;
@@ -417,7 +417,7 @@
 }
 
 @media screen and (max-width: 540px) {
-  .popup__btn-submit {
+  .popup__btn-save {
     font-size: 14px;
     line-height: 17px;
     width: 238px;
