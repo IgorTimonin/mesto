@@ -1,0 +1,10 @@
+.gallery__item {
+  max-height: 360px;
+  max-width: 282px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

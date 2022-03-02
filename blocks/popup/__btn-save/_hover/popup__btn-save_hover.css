@@ -1,0 +1,5 @@
+.popup__btn-save_hover:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  transition: linear 0.3s;
+}
