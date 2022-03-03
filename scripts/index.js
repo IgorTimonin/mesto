@@ -9,8 +9,6 @@ let inputOccupation = document.querySelector('.popup__profile-occupation');
 let likeBtn = document.querySelectorAll('.gallery__like-btn');
 let name = 'ВВедите имя';
 
-console.log(likeBtn);
-
 function togglePopup() {
   popup.classList.toggle('popup__opened');
   inputName.value = profileName.textContent;
