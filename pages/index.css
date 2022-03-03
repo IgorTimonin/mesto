@@ -1,1 +1,48 @@
+@import url(../fonts/inter.css);
+@import url(../blocks/page/page.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__container/profile__container.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__occupation/profile__occupation.css);
+@import url(../blocks/profile/__edit-btn/profile__edit-btn.css);
+@import url(../blocks/profile/__add-btn/profile_add-btn.css);
+@import url(../blocks/gallery/__cards/gallery__cards.css);
+@import url(../blocks/gallery/__item/gallery__item.css);
+@import url(../blocks/gallery/__title/gallery__title.css);
+@import url(../blocks/gallery/__text/gallery__text.css);
+@import url(../blocks/gallery/__like-btn/gallery__like-btn.css);
+@import url(../blocks/gallery/__like-btn/_active/gallery__like-btn_active.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+@import url(../blocks/btn/_hover/btn_hover.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__btn-close/popup__btn-close.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__profile-form/popup__profile-form.css);
+@import url(../blocks/popup/__field/popup__field.css);
+@import url(../blocks/popup/__profile-name/popup__profile-name.css);
+@import url(../blocks/popup/__profile-occupation/popup__profile-occupation.css);
+@import url(../blocks/popup/__btn-save/popup__btn-save.css);
+@import url(../blocks/popup/__btn-save/_hover/popup__btn-save_hover.css);
+@import url(../blocks/popup/__opened/popup__opened.css);
 
+.footer__copyright {
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+  margin: 0;
+  padding: 67px 0 60px;
+}
+
+@media screen and (max-width: 945px) {
+  .footer__copyright {
+    padding: 48px 19px 36px;
+  }
+}
