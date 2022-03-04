@@ -1,4 +1,4 @@
-.page__btn_hover:hover {
+.btn-opacity:hover {
   opacity: 0.6;
   cursor: pointer;
   transition: linear 0.3s;
