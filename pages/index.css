@@ -17,7 +17,7 @@
 @import url(../blocks/gallery/__like-btn/gallery__like-btn.css);
 @import url(../blocks/gallery/__like-btn/_active/gallery__like-btn_active.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
-@import url(../blocks/btn/_hover/btn_hover.css);
+@import url(../blocks/page/__btn/_hover/btn_hover.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__btn-close/popup__btn-close.css);
