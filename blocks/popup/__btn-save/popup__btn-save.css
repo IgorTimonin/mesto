@@ -26,3 +26,9 @@
     height: 46px;
   }
 }
+
+.popup__btn-save:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  transition: linear 0.3s;
+}
