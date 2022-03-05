@@ -10,7 +10,7 @@ let likeBtn = document.querySelectorAll('.gallery__like-btn');
 let name = 'ВВедите имя';
 
 function togglePopup() {
-  popup.classList.toggle('popup__opened');
+  popup.classList.toggle('popup_opened');
   inputName.value = profileName.textContent;
   inputOccupation.value = profileOccupation.textContent;
 };

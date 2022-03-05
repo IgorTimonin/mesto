@@ -29,4 +29,4 @@
 @import url(../blocks/popup/__profile-occupation/popup__profile-occupation.css);
 @import url(../blocks/popup/__btn-save/popup__btn-save.css);
 @import url(../blocks/popup/__btn-save/_hover/popup__btn-save_hover.css);
-@import url(../blocks/popup/__opened/popup__opened.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
