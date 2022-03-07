@@ -7,9 +7,15 @@ let formElement = document.querySelector('.popup__profile-form');
 let inputName = formElement.querySelector('.popup__field_type_name');
 let inputJob = formElement.querySelector('.popup__field_type_job');
 
-function togglePopup() {
-  popup.classList.toggle('popup_opened');
-}
+function popupOpened() {
+  popup.classList.add("popup_opened");
+  inputName.value = profileName.textContent;
+  inputJob.value = profileJob.textContent;
+};
+
+function popupClosed() {
+  popup.classList.remove("popup_opened");
+};
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
@@ -21,18 +27,15 @@ function formSubmitHandler(evt) {
   if (inputJob.value.length < 1) {
     profileJob.textContent = 'Чем вы занимаетесь?';
   }
-  togglePopup();
-}
+  popupClosed();
+};
 
 popup.addEventListener('click', function (event) {
   if (event.target === event.currentTarget) {
-    togglePopup();
+    popupClosed();
   }
 });
 
-openPopup.addEventListener('click', togglePopup);
-inputName.value = profileName.textContent;
-inputJob.value = profileJob.textContent;
-
-closePopup.addEventListener('click', togglePopup);
+openPopup.addEventListener("click", popupOpened);
+closePopup.addEventListener("click", popupClosed);
 formElement.addEventListener('submit', formSubmitHandler);
