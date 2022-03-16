@@ -107,7 +107,7 @@
     <footer class="footer">
       <p class="footer__copyright">&copy;2022 Игорь Тимонин</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup-profile">
       <div class="popup__container">
         <button class="popup__btn-close btn-opacity" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -128,6 +128,31 @@
           />
           <button class="popup__btn-save" type="submit">
             Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup-add-card">
+      <div class="popup__container">
+        <button class="popup__btn-close btn-opacity" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__profile-form" name="profile-form" action="#">
+          <input
+            class="popup__field popup__field_type_name"
+            type="text"
+            value=""
+            name="card-name"
+            placeholder="Название"
+          />
+          <input
+            class="popup__field popup__field_type_job"
+            type="text"
+            value=""
+            name="card-adress"
+            placeholder="Ссылка на картинку"
+          />
+          <button class="popup__btn-save" type="submit">
+            Создать
           </button>
         </form>
       </div>

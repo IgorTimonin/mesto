@@ -1,21 +1,39 @@
 const popup = document.querySelector('.popup');
-const openPopup = document.querySelector('.profile__edit-btn');
-const closePopup = popup.querySelector('.popup__btn-close');
+const popupProfile = document.querySelector('.popup-profile');
+const popupAddCard = document.querySelector('.popup-add-card');
+const closePopupBtn = document.querySelectorAll(".popup__btn-close");
 let profileName = document.querySelector('.profile__name');
 let profileJob = document.querySelector('.profile__job');
-const formElement = document.querySelector(".popup__profile-form");
-let inputName = formElement.querySelector(".popup__field_type_name");
-let inputJob = formElement.querySelector(".popup__field_type_job");
-const likeBtn = document.querySelectorAll(".gallery__like-btn");
+const formElement = document.querySelector('.popup__profile-form');
+let inputName = formElement.querySelector('.popup__field_type_name');
+let inputJob = formElement.querySelector('.popup__field_type_job');
+const likeBtn = document.querySelectorAll('.gallery__like-btn');
+const newCardBtn = document.querySelector('.profile__add-btn');
+const profileBtn = document.querySelector('.profile__edit-btn');
 
-function popupOpened() {
+function popupOpened(popup) {
   popup.classList.add("popup_opened");
+};
+
+function popupClosed(popup) {
+  popup.classList.remove("popup_opened");
+  console.log("close!");
+};
+
+function profileOpen() {
+  popupOpened(popupProfile);
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
 };
 
-function popupClosed() {
-  popup.classList.remove("popup_opened");
+function NewCardOpen() {
+  popupOpened(popupAddCard);
+  inputName.value = profileName.textContent;
+  inputJob.value = profileJob.textContent;
+};
+
+function closePopup() {
+  popupClosed.closest("popup_opened");
 };
 
 function formSubmitHandler(evt) {
@@ -35,14 +53,24 @@ popup.addEventListener('click', function (event) {
   if (event.target === event.currentTarget) {
     popupClosed();
   }
-});
+}
+);
 
-for (let i = 0; i < likeBtn.length; i++) {
-  likeBtn[i].onclick = function () {
-    this.classList.toggle('gallery__like-btn_active');
+likeBtn.forEach((btn) => {
+    btn.addEventListener("click", () =>
+      btn.classList.toggle("gallery__like-btn_active")
+    );
   }
-};
+  );
 
-openPopup.addEventListener("click", popupOpened);
-closePopup.addEventListener("click", popupClosed);
+closePopupBtn.forEach((i) => {
+  i.addEventListener("click", () => popupClosed(i.closest('.popup_opened')
+  )
+  );
+}
+);
+ 
+
+profileBtn.addEventListener("click", profileOpen);
+newCardBtn.addEventListener("click", NewCardOpen);
 formElement.addEventListener('submit', formSubmitHandler);

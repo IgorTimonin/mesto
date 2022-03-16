@@ -14,4 +14,5 @@
 .gallery__like-btn:hover {
   opacity: .5;
   transition: linear 0.3s;
+  cursor: pointer;
 }
