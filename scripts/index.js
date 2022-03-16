@@ -3,9 +3,10 @@ const openPopup = document.querySelector('.profile__edit-btn');
 const closePopup = popup.querySelector('.popup__btn-close');
 let profileName = document.querySelector('.profile__name');
 let profileJob = document.querySelector('.profile__job');
-let formElement = document.querySelector('.popup__profile-form');
-let inputName = formElement.querySelector('.popup__field_type_name');
-let inputJob = formElement.querySelector('.popup__field_type_job');
+const formElement = document.querySelector(".popup__profile-form");
+let inputName = formElement.querySelector(".popup__field_type_name");
+let inputJob = formElement.querySelector(".popup__field_type_job");
+const likeBtn = document.querySelectorAll(".gallery__like-btn");
 
 function popupOpened() {
   popup.classList.add("popup_opened");
@@ -35,6 +36,12 @@ popup.addEventListener('click', function (event) {
     popupClosed();
   }
 });
+
+for (let i = 0; i < likeBtn.length; i++) {
+  likeBtn[i].onclick = function () {
+    this.classList.toggle('gallery__like-btn_active');
+  }
+};
 
 openPopup.addEventListener("click", popupOpened);
 closePopup.addEventListener("click", popupClosed);
