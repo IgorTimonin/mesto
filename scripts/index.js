@@ -1,23 +1,22 @@
-const popup = document.querySelector('.popup');
+const popup = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup-profile');
 const popupAddCard = document.querySelector('.popup-add-card');
 const closePopupBtn = document.querySelectorAll(".popup__btn-close");
 let profileName = document.querySelector('.profile__name');
 let profileJob = document.querySelector('.profile__job');
-const formElement = document.querySelector('.popup__profile-form');
-let inputName = formElement.querySelector('.popup__field_type_name');
-let inputJob = formElement.querySelector('.popup__field_type_job');
+const profileForm = document.querySelector('.popup__profile-form');
+let inputName = profileForm.querySelector('.popup__field_type_name');
+let inputJob = profileForm.querySelector('.popup__field_type_job');
 const likeBtn = document.querySelectorAll('.gallery__like-btn');
 const newCardBtn = document.querySelector('.profile__add-btn');
 const profileBtn = document.querySelector('.profile__edit-btn');
 
-function popupOpened(popup) {
-  popup.classList.add("popup_opened");
+function popupOpened(pop) {
+  pop.classList.add("popup_opened");
 };
 
-function popupClosed(popup) {
-  popup.classList.remove("popup_opened");
-  console.log("close!");
+function popupClosed(pop) {
+  pop.classList.remove("popup_opened");
 };
 
 function profileOpen() {
@@ -28,12 +27,6 @@ function profileOpen() {
 
 function NewCardOpen() {
   popupOpened(popupAddCard);
-  inputName.value = profileName.textContent;
-  inputJob.value = profileJob.textContent;
-};
-
-function closePopup() {
-  popupClosed.closest("popup_opened");
 };
 
 function formSubmitHandler(evt) {
@@ -46,31 +39,28 @@ function formSubmitHandler(evt) {
   if (inputJob.value.length < 1) {
     profileJob.textContent = 'Чем вы занимаетесь?';
   }
-  popupClosed();
+  popupClosed(popup[0]);
 };
+// доделать позже - закрытие попапа при клике в любом месте
 
-popup.addEventListener('click', function (event) {
-  if (event.target === event.currentTarget) {
-    popupClosed();
-  }
-}
-);
+// popup.addEventListener('click', function (event) {  
+//   if (event.target === event.currentTarget) {
+//     popupClosed(popup);
+//   }
+// }
+// );
 
 likeBtn.forEach((btn) => {
     btn.addEventListener("click", () =>
-      btn.classList.toggle("gallery__like-btn_active")
-    );
+      btn.classList.toggle("gallery__like-btn_active"));
   }
   );
 
 closePopupBtn.forEach((i) => {
-  i.addEventListener("click", () => popupClosed(i.closest('.popup_opened')
-  )
-  );
+  i.addEventListener("click", () => popupClosed(i.closest(".popup_opened")));
 }
 );
- 
 
 profileBtn.addEventListener("click", profileOpen);
 newCardBtn.addEventListener("click", NewCardOpen);
-formElement.addEventListener('submit', formSubmitHandler);
+profileForm.addEventListener('submit', formSubmitHandler);
