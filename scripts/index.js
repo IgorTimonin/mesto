@@ -1,6 +1,8 @@
 const popup = document.querySelectorAll('.popup');
+const galleryImg = document.querySelectorAll(".gallery__img");
 const popupProfile = document.querySelector('.popup-profile');
 const profileForm = document.querySelector(".popup__profile-form");
+const popupPhotoView = document.querySelector(".popup__photo-view");
 let inputName = profileForm.querySelector(".popup__field_type_name");
 let inputJob = profileForm.querySelector(".popup__field_type_job");
 const popupAddCard = document.querySelector('.popup-add-card');
@@ -79,6 +81,12 @@ function NewCardOpen() {
   popupOpened(popupAddCard);
 };
 
+function profileOpen() {
+  popupOpened(popupPhotoView);
+  inputName.value = profileName.textContent;
+  inputJob.value = profileJob.textContent;
+};
+
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
@@ -89,7 +97,8 @@ function formSubmitHandler(evt) {
   if (inputJob.value.length < 1) {
     profileJob.textContent = 'Чем вы занимаетесь?';
   }
-  popupClosed(popup[0]);
+  // popupClosed(popup[0]);
+  popupClosed(evt.target.closest(".popup_opened"));
 };
 // доделать позже - закрытие попапа при клике в любом месте
 
@@ -102,12 +111,10 @@ function formSubmitHandler(evt) {
 
 function addCardHandler(evt) {
   evt.preventDefault();
-
-  initialCards.unshift({ name: cardName.value, link: cardAdress.value});
-  console.log(initialCards);
+  initialCards.unshift({ name: cardName.value, link: cardAdress.value });
   addCard(initialCards[0]);
   evt.currentTarget.reset();
-  popupClosed(popup[1]);
+  popupClosed(evt.target.closest(".popup_opened"));
 };
 
 closePopupBtn.forEach((i) => {

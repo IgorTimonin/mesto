@@ -31,7 +31,7 @@
         <ul class="gallery__cards">
           <template class="gallery__template">
           <li class="gallery__item">
-            <img
+            <img onclick="#"
               class="gallery__img"
               src=""
               alt=""
@@ -84,6 +84,7 @@
             value=""
             name="card-name"
             placeholder="Название"
+            required
           />
           <input
             class="popup__field popup__field_newcard-adress"
@@ -91,11 +92,20 @@
             value=""
             name="card-adress"
             placeholder="Ссылка на картинку"
+            required
           />
           <button class="popup__btn-save" type="submit">
             Создать
           </button>
         </form>
+      </div>
+    </div>
+    <div class="popup popup-photo-view">
+      <div class="popup__container">
+        <button class="popup__btn-close btn-opacity" type="button"></button>
+        <figure class="popup__full-photo">
+          <figcaption class="popup__figcaption"></figcaption>
+        </figure>
       </div>
     </div>
     <script src="./scripts/index.js"></script>

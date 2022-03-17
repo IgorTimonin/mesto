@@ -31,4 +31,15 @@
 .gallery__img {
     height: 282px;
     width: 282px;
+    min-width: 282px;
+    min-height: 282px;
+}
+
+.gallery__img:hover {
+cursor: pointer;
+}
+
+.popup__container {
+    max-width: 75vw;
+    max-height: 75vh;
 }
