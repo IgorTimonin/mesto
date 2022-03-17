@@ -10,6 +10,51 @@ let inputJob = profileForm.querySelector('.popup__field_type_job');
 const likeBtn = document.querySelectorAll('.gallery__like-btn');
 const newCardBtn = document.querySelector('.profile__add-btn');
 const profileBtn = document.querySelector('.profile__edit-btn');
+const galleryCards = document.querySelector('.gallery__cards');
+const initialCards = [
+  {
+    name: "Архыз",
+    link: "images/karachaevsk.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  },
+]; 
+
+function addCard(card) {
+  const galleryTemtpate = document.querySelector(".gallery__template").content;
+  const galleryItem = galleryTemtpate
+    .querySelector(".gallery__item")
+    .cloneNode(true);
+
+  galleryItem.querySelector(".gallery__img").src = card.link;
+  galleryItem.querySelector(".gallery__title").textContent = card.name;
+  imgLike = galleryItem.querySelector(".gallery__like-btn");
+  imgLike.addEventListener("click", function (evt) {
+    evt.target.classList.toggle("gallery__like-btn_active");
+  });
+
+  galleryCards.append(galleryItem);
+};
+
+initialCards.map(addCard);
 
 function popupOpened(pop) {
   pop.classList.add("popup_opened");
@@ -50,11 +95,7 @@ function formSubmitHandler(evt) {
 // }
 // );
 
-likeBtn.forEach((btn) => {
-    btn.addEventListener("click", () =>
-      btn.classList.toggle("gallery__like-btn_active"));
-  }
-  );
+
 
 closePopupBtn.forEach((i) => {
   i.addEventListener("click", () => popupClosed(i.closest(".popup_opened")));
