@@ -14,7 +14,7 @@ const galleryCards = document.querySelector('.gallery__cards');
 const initialCards = [
   {
     name: "Архыз",
-    link: "images/karachaevsk.jpg",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
   },
   {
     name: "Челябинская область",
@@ -94,8 +94,6 @@ function formSubmitHandler(evt) {
 //   }
 // }
 // );
-
-
 
 closePopupBtn.forEach((i) => {
   i.addEventListener("click", () => popupClosed(i.closest(".popup_opened")));
