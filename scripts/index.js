@@ -1,13 +1,15 @@
 const popup = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup-profile');
+const profileForm = document.querySelector(".popup__profile-form");
+let inputName = profileForm.querySelector(".popup__field_type_name");
+let inputJob = profileForm.querySelector(".popup__field_type_job");
 const popupAddCard = document.querySelector('.popup-add-card');
+const newCardForm = popupAddCard.querySelector(".popup__newcard-form");
+let cardName = popupAddCard.querySelector(".popup__field_newcard-name");
+let cardAdress = popupAddCard.querySelector(".popup__field_newcard-adress");
 const closePopupBtn = document.querySelectorAll(".popup__btn-close");
 let profileName = document.querySelector('.profile__name');
 let profileJob = document.querySelector('.profile__job');
-const profileForm = document.querySelector('.popup__profile-form');
-let inputName = profileForm.querySelector('.popup__field_type_name');
-let inputJob = profileForm.querySelector('.popup__field_type_job');
-const likeBtn = document.querySelectorAll('.gallery__like-btn');
 const newCardBtn = document.querySelector('.profile__add-btn');
 const profileBtn = document.querySelector('.profile__edit-btn');
 const galleryCards = document.querySelector('.gallery__cards');
@@ -45,13 +47,16 @@ function addCard(card) {
     .cloneNode(true);
 
   galleryItem.querySelector(".gallery__img").src = card.link;
+  galleryItem.querySelector(".gallery__img").alt = card.name;
   galleryItem.querySelector(".gallery__title").textContent = card.name;
+  
   imgLike = galleryItem.querySelector(".gallery__like-btn");
   imgLike.addEventListener("click", function (evt) {
     evt.target.classList.toggle("gallery__like-btn_active");
   });
 
-  galleryCards.append(galleryItem);
+  galleryCards.prepend(galleryItem);
+  return addCard;
 };
 
 initialCards.map(addCard);
@@ -95,6 +100,16 @@ function formSubmitHandler(evt) {
 // }
 // );
 
+function addCardHandler(evt) {
+  evt.preventDefault();
+
+  initialCards.unshift({ name: cardName.value, link: cardAdress.value});
+  console.log(initialCards);
+  addCard(initialCards[0]);
+  evt.currentTarget.reset();
+  popupClosed(popup[1]);
+};
+
 closePopupBtn.forEach((i) => {
   i.addEventListener("click", () => popupClosed(i.closest(".popup_opened")));
 }
@@ -103,3 +118,4 @@ closePopupBtn.forEach((i) => {
 profileBtn.addEventListener("click", profileOpen);
 newCardBtn.addEventListener("click", NewCardOpen);
 profileForm.addEventListener('submit', formSubmitHandler);
+newCardForm.addEventListener("submit", addCardHandler);
