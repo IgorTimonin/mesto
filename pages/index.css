@@ -27,50 +27,7 @@
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__btn-save/popup__btn-save.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
-
-.gallery__img {
-  height: 282px;
-  width: 282px;
-  min-width: 282px;
-  min-height: 282px;
-}
-
-.gallery__img:hover {
-  cursor: pointer;
-}
-
-.popup__figure {
-  position: relative;
-  font-family: "Inter", "Arial", "Helvetica", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  color: #ffffff;
-}
-
-.popup__full-photo {
-  max-width: 75vw;
-  max-height: 75vh;
-}
-
-.gallery__delete-btn {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  background-color: rgba(255, 255, 255, 0);
-  background-image: url(../images/del.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  min-width: 18px;
-  min-height: 19px;
-  border: none;
-  transition: linear 0.3s;
-}
-
-.gallery__delete-btn:hover {
-  opacity: .5;
-  transition: linear 0.3s;
-  cursor: pointer;
-}  
-
+@import url(../blocks/gallery/__img/gallery__img.css);
+@import url(../blocks/gallery/__delete-btn/gallery__delete-btn.css);
+@import url(../blocks/popup/__figure/popup__figure.css);
+@import url(../blocks/popup/__full-photo/popup__full-photo.css);
