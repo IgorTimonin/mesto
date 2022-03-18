@@ -63,14 +63,20 @@ function addCard(card) {
   fullPhoto.alt = card.name;
   figCaption = document.querySelector(".popup__figcaption");
   figCaption.textContent = card.name;
-
-})
+  });
+  deletBtn = galleryItem.querySelector(".gallery__delete-btn");
+  deletBtn.addEventListener("click", removeCard);
 
   galleryCards.prepend(galleryItem);
   return addCard;
 };
 
 initialCards.map(addCard);
+
+function removeCard(event) {
+ const card = event.currentTarget.closest(".gallery__item");
+ card.remove();
+};
 
 function popupOpened(pop) {
   pop.classList.add("popup_opened");
@@ -90,14 +96,6 @@ function NewCardOpen() {
   popupOpened(popupAddCard);
 };
 
-// function fullPhotoOpen() {
-//   popupOpened(popupPhotoView);
-//   figCaption = document.querySelector(".popup__figcaption");
-//   // figCaption.textContent = card.name;
-//   // inputName.value = profileName.textContent;
-//   // inputJob.value = profileJob.textContent;
-// };
-
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
@@ -110,14 +108,6 @@ function formSubmitHandler(evt) {
   }
   popupClosed(evt.target.closest(".popup_opened"));
 };
-// доделать позже - закрытие попапа при клике в любом месте
-
-// popup.addEventListener('click', function (event) {  
-//   if (event.target === event.currentTarget) {
-//     popupClosed(popup);
-//   }
-// }
-// );
 
 function addCardHandler(evt) {
   evt.preventDefault();
