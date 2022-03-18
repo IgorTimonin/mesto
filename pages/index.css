@@ -43,3 +43,9 @@ cursor: pointer;
     max-width: 75vw;
     max-height: 75vh;
 }
+
+.popup__full-photo {
+    height: 100%;
+    width: 100%;
+}
+
