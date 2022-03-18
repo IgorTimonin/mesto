@@ -1,5 +1,4 @@
 const popup = document.querySelectorAll('.popup');
-// const galleryImgBtn = document.querySelectorAll(".gallery__img");
 const popupProfile = document.querySelector('.popup-profile');
 const profileForm = document.querySelector(".popup__profile-form");
 const popupPhotoView = document.querySelector('.popup-photo-view');
@@ -57,12 +56,15 @@ function addCard(card) {
     evt.target.classList.toggle("gallery__like-btn_active")}); 
   
   galleryImgBtn = galleryItem.querySelector(".gallery__img");
-  galleryImgBtn.addEventListener("click", fullPhotoOpen);
-  // function (ev) {
-  //   console.log('click!');
-  //   ev.target.classList.add("popup_opened"); 
+  galleryImgBtn.addEventListener("click",  function fullPhotoOpen() {
+  popupOpened(popupPhotoView);
+  fullPhoto = document.querySelector(".popup__full-photo");
+  fullPhoto.src = card.link;
+  fullPhoto.alt = card.name;
+  figCaption = document.querySelector(".popup__figcaption");
+  figCaption.textContent = card.name;
 
-  // });
+})
 
   galleryCards.prepend(galleryItem);
   return addCard;
@@ -88,11 +90,13 @@ function NewCardOpen() {
   popupOpened(popupAddCard);
 };
 
-function fullPhotoOpen() {
-  popupOpened(popupPhotoView);
-  // inputName.value = profileName.textContent;
-  // inputJob.value = profileJob.textContent;
-};
+// function fullPhotoOpen() {
+//   popupOpened(popupPhotoView);
+//   figCaption = document.querySelector(".popup__figcaption");
+//   // figCaption.textContent = card.name;
+//   // inputName.value = profileName.textContent;
+//   // inputJob.value = profileJob.textContent;
+// };
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
@@ -104,7 +108,6 @@ function formSubmitHandler(evt) {
   if (inputJob.value.length < 1) {
     profileJob.textContent = 'Чем вы занимаетесь?';
   }
-  // popupClosed(popup[0]);
   popupClosed(evt.target.closest(".popup_opened"));
 };
 // доделать позже - закрытие попапа при клике в любом месте
@@ -128,12 +131,6 @@ closePopupBtn.forEach((i) => {
   i.addEventListener("click", () => popupClosed(i.closest(".popup_opened")));
 }
 );
-
-// galleryImgBtn.forEach((c) => {
-//   console.log("click1");
-//   c.addEventListener("click", () => fullPhotoOpen(c.closest(".popup")));
-//   console.log("click2");
-// });
 
 profileBtn.addEventListener("click", profileOpen);
 newCardBtn.addEventListener("click", NewCardOpen);

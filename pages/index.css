@@ -23,29 +23,33 @@
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__btn-close/popup__btn-close.css);
 @import url(../blocks/popup/__title/popup__title.css);
-@import url(../blocks/popup/__profile-form/popup__profile-form.css);
+@import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__btn-save/popup__btn-save.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 
 .gallery__img {
-    height: 282px;
-    width: 282px;
-    min-width: 282px;
-    min-height: 282px;
+  height: 282px;
+  width: 282px;
+  min-width: 282px;
+  min-height: 282px;
 }
 
 .gallery__img:hover {
-cursor: pointer;
+  cursor: pointer;
 }
 
-.popup__container {
-    max-width: 75vw;
-    max-height: 75vh;
+.popup__figure {
+  position: relative;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
 }
 
 .popup__full-photo {
-    height: 100%;
-    width: 100%;
+  max-width: 75vw;
+  max-height: 75vh;
 }
-
