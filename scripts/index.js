@@ -1,16 +1,16 @@
-const popup = document.querySelectorAll(".popup");
+const popupList = document.querySelectorAll(".popup");
 const popupProfile = document.querySelector(".popup-profile");
 const profileForm = document.querySelector(".popup__profile-form");
-const popupPhotoView = document.querySelector(".popup-photo-view");
-let inputName = profileForm.querySelector(".popup__field_type_name");
-let inputJob = profileForm.querySelector(".popup__field_type_job");
+const popupPhotoView = document.querySelector(".popup__photo-view");
+const inputName = profileForm.querySelector(".popup__field_type_name");
+const inputJob = profileForm.querySelector(".popup__field_type_job");
 const popupAddCard = document.querySelector(".popup-add-card");
 const newCardForm = popupAddCard.querySelector(".popup__newcard-form");
-let cardName = popupAddCard.querySelector(".popup__field_newcard-name");
-let cardAdress = popupAddCard.querySelector(".popup__field_newcard-adress");
-const closePopupBtn = document.querySelectorAll(".popup__btn-close");
-let profileName = document.querySelector(".profile__name");
-let profileJob = document.querySelector(".profile__job");
+const cardName = popupAddCard.querySelector(".popup__field_newcard-name");
+const cardAdress = popupAddCard.querySelector(".popup__field_newcard-adress");
+const closePopupBtnList = document.querySelectorAll(".popup__btn-close");
+const profileName = document.querySelector(".profile__name");
+const profileJob = document.querySelector(".profile__job");
 const newCardBtn = document.querySelector(".profile__add-btn");
 const profileBtn = document.querySelector(".profile__edit-btn");
 const galleryCards = document.querySelector(".gallery__cards");
@@ -118,7 +118,7 @@ function addCardHandler(evt) {
   popupClosed(evt.target.closest(".popup_opened"));
 }
 
-closePopupBtn.forEach((i) => {
+closePopupBtnList.forEach((i) => {
   i.addEventListener("click", () => popupClosed(i.closest(".popup_opened")));
 });
 
