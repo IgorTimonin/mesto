@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
@@ -21,27 +21,30 @@
         <div class="profile__info">
           <div class="profile__container">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-btn btn-opacity" type="button"></button>
+            <button
+              class="profile__edit-btn btn-opacity"
+              type="button"
+            ></button>
           </div>
           <p class="profile__job">Исследователь океана</p>
         </div>
-        <button class="profile__add-btn btn-opacity"  type="button"></button>
+        <button class="profile__add-btn btn-opacity" type="button"></button>
       </section>
       <section class="gallery">
         <ul class="gallery__cards">
           <template class="gallery__template">
-          <li class="gallery__item">
-            <button class="gallery__delete-btn" type="button"></button>
-            <img 
-              class="gallery__img"
-              src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg"
-              alt="макет"
-            />
-            <div class="gallery__text">
-              <h2 class="gallery__title"></h2>
-              <button class="gallery__like-btn" type="button"></button>
-            </div>
-          </li>
+            <li class="gallery__item">
+              <button class="gallery__delete-btn" type="button"></button>
+              <img
+                class="gallery__img"
+                src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg"
+                alt="макет"
+              />
+              <div class="gallery__text">
+                <h2 class="gallery__title"></h2>
+                <button class="gallery__like-btn" type="button"></button>
+              </div>
+            </li>
           </template>
         </ul>
       </section>
@@ -53,13 +56,18 @@
       <div class="popup__container">
         <button class="popup__btn-close btn-opacity" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form popup__profile-form" name="profile-form" action="#">
+        <form
+          class="popup__form popup__profile-form"
+          name="profile-form"
+          action="#"
+        >
           <input
             class="popup__field popup__field_type_name"
             type="text"
             value="Жак-Ив Кусто"
             name="user-name"
             placeholder="Введите имя"
+            required
           />
           <input
             class="popup__field popup__field_type_job"
@@ -67,10 +75,9 @@
             value="Исследователь океана"
             name="user-job"
             placeholder="Введите род деятельности"
+            required
           />
-          <button class="popup__btn-save" type="submit">
-            Сохранить
-          </button>
+          <button class="popup__btn-save" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
@@ -78,7 +85,11 @@
       <div class="popup__container">
         <button class="popup__btn-close btn-opacity" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form popup__newcard-form" name="newcard-form" action="#">
+        <form
+          class="popup__form popup__newcard-form"
+          name="newcard-form"
+          action="#"
+        >
           <input
             class="popup__field popup__field_newcard-name"
             type="text"
@@ -95,18 +106,20 @@
             placeholder="Ссылка на картинку"
             required
           />
-          <button class="popup__btn-save" type="submit">
-            Создать
-          </button>
+          <button class="popup__btn-save" type="submit">Создать</button>
         </form>
       </div>
     </div>
     <div class="popup popup__photo-view">
-        <figure class="popup__figure">
+      <figure class="popup__figure">
         <button class="popup__btn-close btn-opacity" type="button"></button>
-          <img class="popup__full-photo" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="макет">
-          <figcaption class="popup__figcaption"></figcaption>
-        </figure>
+        <img
+          class="popup__full-photo"
+          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg"
+          alt="макет"
+        />
+        <figcaption class="popup__figcaption"></figcaption>
+      </figure>
     </div>
     <script src="./scripts/index.js"></script>
   </body>
