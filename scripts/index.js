@@ -68,10 +68,11 @@ function addCard(card) {
   });
   deletBtn = galleryItem.querySelector('.gallery__delete-btn');
   deletBtn.addEventListener('click', removeCard);
+  // return addCard;
   galleryCards.prepend(galleryItem);
 }
 
-initialCards.map(addCard);
+initialCards.forEach(addCard);
 
 function removeCard(event) {
   const card = event.currentTarget.closest('.gallery__item');
@@ -90,7 +91,6 @@ function profileOpen() {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
   popupOpened(popupProfile);
-  
 }
 
 function NewCardOpen() {
@@ -108,8 +108,10 @@ function addCardHandler(evt) {
   evt.preventDefault();
   initialCards.unshift({ name: cardName.value, link: cardAdress.value });
   addCard(initialCards[0]);
-  evt.currentTarget.reset();
-  popupClosed(evt.target.closest('.popup_opened'));
+  // const newCard = { name: cardName.value, link: cardAdress.value };
+  // addCard(createCard(newCard));
+  newCardForm.reset();
+  popupClosed(popupAddCard);
 }
 
 closePopupBtnList.forEach((i) => {
