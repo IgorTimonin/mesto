@@ -43,7 +43,7 @@ const initialCards = [
   },
 ];
 
-function addCard(card) {
+function renderNewCard(card) {
   const galleryTemtpate = document.querySelector('.gallery__template').content;
   const galleryItem = galleryTemtpate
     .querySelector('.gallery__item')
@@ -60,65 +60,65 @@ function addCard(card) {
     evt.target.classList.toggle('gallery__like-btn_active');
   });
 
-  galleryImg.addEventListener('click', function fullPhotoOpen() {
-    popupOpened(popupPhotoView);
+  galleryImg.addEventListener('click', function openFullPhoto() {
+    openPopup(popupPhotoView);
     fullPhoto.src = card.link;
     fullPhoto.alt = card.name;
     figCaption.textContent = card.name;
   });
   deletBtn = galleryItem.querySelector('.gallery__delete-btn');
   deletBtn.addEventListener('click', removeCard);
-  // return addCard;
+  // return renderNewCard;
   galleryCards.prepend(galleryItem);
 }
 
-initialCards.forEach(addCard);
+initialCards.forEach(renderNewCard);
 
 function removeCard(event) {
   const card = event.currentTarget.closest('.gallery__item');
   card.remove();
 }
 
-function popupOpened(pop) {
+function openPopup(pop) {
   pop.classList.add('popup_opened');
 }
 
-function popupClosed(pop) {
+function closePopup(pop) {
   pop.classList.remove('popup_opened');
 }
 
-function profileOpen() {
+function openProfilePopup() {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
-  popupOpened(popupProfile);
+  openPopup(popupProfile);
 }
 
-function NewCardOpen() {
-  popupOpened(popupAddCard);
+function openNewCardPopup() {
+  openPopup(popupAddCard);
 }
 
-function formSubmitHandler(evt) {
+function handlerFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
-  popupClosed(evt.target.closest('.popup_opened'));
+  closePopup(evt.target.closest('.popup_opened'));
 }
 
-function addCardHandler(evt) {
+function addNewCard(evt) {
   evt.preventDefault();
   initialCards.unshift({ name: cardName.value, link: cardAdress.value });
-  addCard(initialCards[0]);
+  renderNewCard(initialCards[0]);
   // const newCard = { name: cardName.value, link: cardAdress.value };
-  // addCard(createCard(newCard));
+  // renderNewCard(createCard(newCard));
   newCardForm.reset();
-  popupClosed(popupAddCard);
+  closePopup(popupAddCard);
 }
 
 closePopupBtnList.forEach((i) => {
-  i.addEventListener('click', () => popupClosed(i.closest('.popup_opened')));
+  i.addEventListener('click', () => closePopup(i.closest('.popup_opened')));
 });
 
-profileBtn.addEventListener('click', profileOpen);
-newCardBtn.addEventListener('click', NewCardOpen);
-profileForm.addEventListener('submit', formSubmitHandler);
-newCardForm.addEventListener('submit', addCardHandler);
+profileBtn.addEventListener('click', openProfilePopup);
+newCardBtn.addEventListener('click', openNewCardPopup);
+profileForm.addEventListener('submit', handlerFormSubmit);
+newCardForm.addEventListener('submit', addNewCard);
