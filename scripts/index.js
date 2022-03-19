@@ -16,6 +16,7 @@ const profileBtn = document.querySelector('.profile__edit-btn');
 const galleryCards = document.querySelector('.gallery__cards');
 const fullPhoto = document.querySelector('.popup__full-photo');
 const figCaption = document.querySelector('.popup__figcaption');
+const galleryTemtpate = document.querySelector('.gallery__template').content;
 const initialCards = [
   {
     name: 'Архыз',
@@ -43,16 +44,15 @@ const initialCards = [
   },
 ];
 
-function renderNewCard(card) {
-  const galleryTemtpate = document.querySelector('.gallery__template').content;
+function createCard(card) {
   const galleryItem = galleryTemtpate
     .querySelector('.gallery__item')
     .cloneNode(true);
 
-  const galleryImg = galleryItem.querySelector('.gallery__img');
+  const galleryCard = galleryItem.querySelector('.gallery__img');
 
-  galleryImg.src = card.link;
-  galleryImg.alt = card.name;
+  galleryCard.src = card.link;
+  galleryCard.alt = card.name;
   galleryItem.querySelector('.gallery__title').textContent = card.name;
 
   imgLike = galleryItem.querySelector('.gallery__like-btn');
@@ -60,7 +60,7 @@ function renderNewCard(card) {
     evt.target.classList.toggle('gallery__like-btn_active');
   });
 
-  galleryImg.addEventListener('click', function openFullPhoto() {
+  galleryCard.addEventListener('click', function openFullPhoto() {
     openPopup(popupPhotoView);
     fullPhoto.src = card.link;
     fullPhoto.alt = card.name;
@@ -68,11 +68,33 @@ function renderNewCard(card) {
   });
   deletBtn = galleryItem.querySelector('.gallery__delete-btn');
   deletBtn.addEventListener('click', removeCard);
-  // return renderNewCard;
-  galleryCards.prepend(galleryItem);
+  return galleryItem;
 }
 
-initialCards.forEach(renderNewCard);
+function renderCard(card) {
+  createCard(card);
+  galleryCards.prepend(card);
+}
+
+// function initialPhoto() {
+//   const photoInfo = initialCards.map(createCard);
+//   galleryCards.append(...photoInfo);
+// }
+
+// initialPhoto();
+
+// renderCard(initialCards.forEach(createCard));
+console.log(initialCards.forEach(createCard));
+
+function addNewCard(evt) {
+  evt.preventDefault();
+
+  const newCard = { name: cardName.value, link: cardAdress.value };
+  renderCard(createCard(newCard));
+
+  newCardForm.reset();
+  closePopup(popupAddCard);
+}
 
 function removeCard(event) {
   const card = event.currentTarget.closest('.gallery__item');
@@ -102,16 +124,6 @@ function handlerFormSubmit(evt) {
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
   closePopup(evt.target.closest('.popup_opened'));
-}
-
-function addNewCard(evt) {
-  evt.preventDefault();
-  initialCards.unshift({ name: cardName.value, link: cardAdress.value });
-  renderNewCard(initialCards[0]);
-  // const newCard = { name: cardName.value, link: cardAdress.value };
-  // renderNewCard(createCard(newCard));
-  newCardForm.reset();
-  closePopup(popupAddCard);
 }
 
 closePopupBtnList.forEach((i) => {
