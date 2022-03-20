@@ -1,7 +1,7 @@
 const popupList = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup-profile');
 const profileForm = document.querySelector('.popup__profile-form');
-const popupPhotoView = document.querySelector('.popup__photo-view');
+const popupFullSize = document.querySelector('.popup__fullsize');
 const inputName = profileForm.querySelector('.popup__field_type_name');
 const inputJob = profileForm.querySelector('.popup__field_type_job');
 const popupAddCard = document.querySelector('.popup-add-card');
@@ -61,7 +61,7 @@ function createCard(card) {
     fullPhoto.src = card.link;
     fullPhoto.alt = card.name;
     figCaption.textContent = card.name;
-    openPopup(popupPhotoView);
+    openPopup(popupFullSize);
   })
   deletBtn = galleryItem.querySelector('.gallery__delete-btn');
   deletBtn.addEventListener('click', removeCard);
