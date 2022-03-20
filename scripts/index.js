@@ -48,24 +48,21 @@ function createCard(card) {
   const galleryItem = galleryTemtpate
     .querySelector('.gallery__item')
     .cloneNode(true);
-
   const galleryCard = galleryItem.querySelector('.gallery__img');
-
   galleryCard.src = card.link;
   galleryCard.alt = card.name;
   galleryItem.querySelector('.gallery__title').textContent = card.name;
-
   imgLike = galleryItem.querySelector('.gallery__like-btn');
   imgLike.addEventListener('click', function (evt) {
     evt.target.classList.toggle('gallery__like-btn_active');
   });
 
   galleryCard.addEventListener('click', function openFullPhoto() {
-    openPopup(popupPhotoView);
     fullPhoto.src = card.link;
     fullPhoto.alt = card.name;
     figCaption.textContent = card.name;
-  });
+    openPopup(popupPhotoView);
+  })
   deletBtn = galleryItem.querySelector('.gallery__delete-btn');
   deletBtn.addEventListener('click', removeCard);
   return galleryItem;
@@ -76,22 +73,16 @@ function renderCard(card) {
   galleryCards.prepend(card);
 }
 
-// function initialPhoto() {
-//   const photoInfo = initialCards.map(createCard);
-//   galleryCards.append(...photoInfo);
-// }
-
-// initialPhoto();
-
-// renderCard(initialCards.forEach(createCard));
-console.log(initialCards.forEach(createCard));
+function initialPhoto() {
+  const photoInfo = initialCards.map(createCard);
+  galleryCards.append(...photoInfo);
+}
+initialPhoto();
 
 function addNewCard(evt) {
   evt.preventDefault();
-
   const newCard = { name: cardName.value, link: cardAdress.value };
   renderCard(createCard(newCard));
-
   newCardForm.reset();
   closePopup(popupAddCard);
 }
