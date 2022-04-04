@@ -63,8 +63,8 @@
           novalidate
         >
           <input
-            id="profile-name-input"
-            class="popup__field popup__field_type_name"
+            id="name-input"
+            class="popup__field popup__field_type_name form__input"
             type="text"
             value="Жак-Ив Кусто"
             name="user-name"
@@ -73,10 +73,10 @@
             maxlength="40"
             required
           />
-          <span class="profile-name-input-error form__input-error">Необходимо заполнить данное поле</span>
+          <span class="name-input-error form__input-error">Вы пропустили это поле.</span>
           <input
-            id="profile-job-input"
-            class="popup__field popup__field_type_job"
+            id="job-input"
+            class="popup__field popup__field_type_job form__input"
             type="text"
             value="Исследователь океана"
             name="user-job"
@@ -85,7 +85,7 @@
             maxlength="200"
             required
           />
-          <span class="profile-job-input-error form__input-error">Необходимо заполнить данное поле</span>
+          <span class="job-input-error form__input-error">Вы пропустили это поле.</span>
           <button class="popup__btn-save" type="submit">Сохранить</button>
         </form>
       </div>
@@ -102,7 +102,7 @@
         >
           <input
             id="newcard-name-input"
-            class="popup__field popup__field_newcard-name"
+            class="popup__field popup__field_newcard-name form__input"
             type="text"
             value=""
             name="card-name"
@@ -111,17 +111,17 @@
             maxlength="30"
             required
           >
-          <span class="newcard-name-input-error form__input-error">Необходимо заполнить данное поле</span>
+          <span class="newcard-name-input-error form__input-error">Вы пропустили это поле.</span>
           <input
             id="newcard-url-input"
-            class="popup__field popup__field_newcard-adress"
+            class="popup__field popup__field_newcard-adress form__input"
             type="url"
             value=""
             name="card-adress"
             placeholder="Ссылка на картинку"
             required
           />
-          <span class="newcard-url-input-error form__input-error">Необходимо заполнить данное поле</span>
+          <span class="newcard-url-input-error form__input-error">Введите адрес сайта.</span>
           <button class="popup__btn-save" type="submit">Создать</button>
         </form>
       </div>
