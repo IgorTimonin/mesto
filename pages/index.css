@@ -32,3 +32,25 @@
 @import url(../blocks/popup/__figure/popup__figure.css);
 @import url(../blocks/popup/__full-photo/popup__full-photo.css);
 @import url(../blocks/popup/_fullsize/popup_fullsize.css);
+
+.form__input_type_error {
+    border-bottom-color: red;
+}
+
+.form__input-error {
+    margin-top: 5px;
+    font-family: "Inter",
+    "Arial",
+    "Helvetica",
+    sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+}
+
+.form__submit_inactive {
+    opacity: 0.2;
+    /* color: rgba(0, 0, 0, 0.15); */
+}

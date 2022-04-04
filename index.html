@@ -60,23 +60,32 @@
           class="popup__form popup__profile-form"
           name="profile-form"
           action="#"
+          novalidate
         >
           <input
+            id="profile-name-input"
             class="popup__field popup__field_type_name"
             type="text"
             value="Жак-Ив Кусто"
             name="user-name"
             placeholder="Введите имя"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span class="profile-name-input-error form__input-error">Необходимо заполнить данное поле</span>
           <input
+            id="profile-job-input"
             class="popup__field popup__field_type_job"
             type="text"
             value="Исследователь океана"
             name="user-job"
             placeholder="Введите род деятельности"
+            minlength="2"
+            maxlength="200"
             required
           />
+          <span class="profile-job-input-error form__input-error">Необходимо заполнить данное поле</span>
           <button class="popup__btn-save" type="submit">Сохранить</button>
         </form>
       </div>
@@ -89,23 +98,30 @@
           class="popup__form popup__newcard-form"
           name="newcard-form"
           action="#"
+          novalidate
         >
           <input
+            id="newcard-name-input"
             class="popup__field popup__field_newcard-name"
             type="text"
             value=""
             name="card-name"
             placeholder="Название"
+            minlength="2"
+            maxlength="30"
             required
-          />
+          >
+          <span class="newcard-name-input-error form__input-error">Необходимо заполнить данное поле</span>
           <input
+            id="newcard-url-input"
             class="popup__field popup__field_newcard-adress"
-            type="text"
+            type="url"
             value=""
             name="card-adress"
             placeholder="Ссылка на картинку"
             required
           />
+          <span class="newcard-url-input-error form__input-error">Необходимо заполнить данное поле</span>
           <button class="popup__btn-save" type="submit">Создать</button>
         </form>
       </div>
