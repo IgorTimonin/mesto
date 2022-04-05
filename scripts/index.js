@@ -17,9 +17,6 @@ const galleryCards = document.querySelector('.gallery__cards');
 const cardElement = document.querySelector('.popup__full-photo');
 const figureCaption = document.querySelector('.popup__figcaption');
 const galleryTemtpate = document.querySelector('.gallery__template').content;
-// const formElement = document.querySelectorAll('.popup__form');
-// const formInput = formElement.querySelectorAll('.popup__field');
-// const formError = formElement.querySelector(`.${formInput.id}-error`);
 const initialCards = [
   {
     name: 'Архыз',
@@ -96,6 +93,16 @@ function removeCard(event) {
 
 function openPopup(pop) {
   pop.classList.add('popup_opened');
+  escHandler(pop);
+  overlayHandler(pop);
+}
+
+function escHandler(popup) {
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+    }
+  });
 }
 
 function closePopup(pop) {
@@ -107,7 +114,7 @@ function handlerFormSubmit(evt) {
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
   closePopup(popupProfile);
-};
+}
 
 popupCloseBtnList.forEach((popupCloseButton) => {
   popupCloseButton.addEventListener('click', () =>
@@ -139,28 +146,17 @@ const isValid = (formElement, inputElement) => {
 
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.form__input'));
+  const buttonElement = formElement.querySelector('.form__submit');
+  toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       isValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
 
-// const enableValidation = () => {
-//   const formList = Array.from(document.querySelectorAll('.popup__form'));
-//   formList.forEach((formElement) => {
-//     formElement.addEventListener('input', function (evt) {
-//       evt.preventDefault();
-//     });
-//     const fieldsetList = Array.from(formElement.querySelectorAll('.form__set'));
-//     fieldsetList.forEach((fieldSet) => {
-//       setEventListeners(fieldSet);
-//     });
-//   });
-// };
-
 function openProfilePopup() {
-  
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
   openPopup(popupProfile);
@@ -172,8 +168,29 @@ function openNewCardPopup() {
   setEventListeners(popupAddCard);
 }
 
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('form__submit_inactive');
+  } else {
+    buttonElement.classList.remove('form__submit_inactive');
+  }
+};
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+function overlayHandler(pop) {
+  pop.addEventListener('click', function (evt) {
+    if (evt.target === evt.currentTarget) {
+      closePopup(pop);
+    }
+  });
+}
+
 profileBtn.addEventListener('click', openProfilePopup);
 newCardBtn.addEventListener('click', openNewCardPopup);
 profileForm.addEventListener('submit', handlerFormSubmit);
 newCardForm.addEventListener('submit', addNewCard);
-
