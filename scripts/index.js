@@ -93,10 +93,10 @@ function removeCard(event) {
   card.remove();
 }
 
-function openPopup(pop) {
-  pop.classList.add(popupOpenClass);
-  escHandler(pop);
-  overlayHandler(pop);
+function openPopup(popup) {
+  popup.classList.add(popupOpenClass);
+  escHandler(popup);
+  overlayHandler(popup);
   enableValidation(validationObj);
 }
 
@@ -108,10 +108,8 @@ function escHandler(popup) {
   });
 }
 
-function closePopup(pop) {
-  pop.classList.remove(popupOpenClass);
-  // pop.querySelectorAll(inputSelector)
-  
+function closePopup(popup) {
+  popup.classList.remove(popupOpenClass);
 }
 
 function handlerFormSubmit(evt) {
@@ -137,10 +135,10 @@ function openNewCardPopup() {
   openPopup(popupAddCard);
 }
 
-function overlayHandler(pop) {
-  pop.addEventListener('click', function (evt) {
+function overlayHandler(popup) {
+  popup.addEventListener('click', function (evt) {
     if (evt.target === evt.currentTarget) {
-      closePopup(pop);
+      closePopup(popup);
     }
   });
 }

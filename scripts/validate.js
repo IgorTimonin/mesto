@@ -7,25 +7,10 @@ const validationObj = {
   activeErrorClass: 'form__input-error_active',
 };
 
-function enableValidation({
-  formSelector, ...rest
-//   inputSelector,
-//   submitButtonSelector,
-//   inactiveButtonClass,
-//   inputErrorClass,
-//   activeErrorClass,
-}) {
+function enableValidation({formSelector, ...rest}) {
   const activePopup = document.querySelector('.' + popupOpenClass);
   activePopup.querySelectorAll(formSelector).forEach((formElement) => {
-    setEventListeners(
-      formElement,
-    //   inputSelector,
-    //   submitButtonSelector,
-    //   inactiveButtonClass,
-    //   inputErrorClass,
-    //   activeErrorClass
-    rest
-    );
+    setEventListeners(formElement, rest);
   });
 }
 
@@ -40,24 +25,23 @@ const setEventListeners = (
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
   toggleButtonState(inputList, buttonElement, inactiveButtonClass);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement, inputErrorClass, activeErrorClass);
-      toggleButtonState(inputList, buttonElement, inactiveButtonClass);
-    });
-  });
+   inputList.forEach((inputElement) => {
+     inputElement.addEventListener('input', () => {
+       isValid(formElement, inputElement, inputErrorClass, activeErrorClass);
+       toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+     });
+   });
 };
 
 const showInputError = (
   formElement,
   inputElement,
-  errorMessage,
   inputErrorClass,
   activeErrorClass
 ) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(inputErrorClass);
-  errorElement.textContent = errorMessage;
+  errorElement.textContent = inputElement.validationMessage;
   errorElement.classList.add(activeErrorClass);
 };
 
@@ -78,13 +62,11 @@ const isValid = (
   inputElement,
   inputErrorClass,
   activeErrorClass,
-  ...rest
 ) => {
   if (!inputElement.validity.valid) {
     showInputError(
       formElement,
       inputElement,
-      inputElement.validationMessage,
       inputErrorClass,
       activeErrorClass
     );

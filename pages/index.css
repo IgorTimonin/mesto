@@ -1,4 +1,5 @@
 @import url(../vendor/normalize.css);
+@import url(../blocks/popup/popup.css);
 @import url(../fonts/inter.css);
 @import url(../blocks/page/page.css);
 @import url(../blocks/header/header.css);
@@ -19,7 +20,6 @@
 @import url(../blocks/gallery/__like-btn/_active/gallery__like-btn_active.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/btn-opacity/btn-opacity.css);
-@import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__btn-close/popup__btn-close.css);
 @import url(../blocks/popup/__title/popup__title.css);
