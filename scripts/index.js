@@ -106,7 +106,6 @@ function escHandler(popup) {
     function EscListner(evt) {
       if (evt.key === 'Escape') {
         closePopup(popup);
-        console.log('Esc pushed');
       }
     },
     { once: true }
