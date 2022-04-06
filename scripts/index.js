@@ -111,7 +111,7 @@ function escHandler(popup) {
     },
     { once: true }
   );
-}
+} 
 
 function closePopup(popup) {
   popup.classList.remove(popupOpenClass);
