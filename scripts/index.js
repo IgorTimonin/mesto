@@ -113,18 +113,6 @@ function escHandler(popup) {
   );
 }
 
-// function EscListner(evt) {
-//     if (evt.key === 'Escape') {
-//       closePopup(popup);
-//       console.log('Esc pushed');
-//     }
-//     document.removeEventListener('keydown', EscListner());
-//   };
-
-// function escHandler(popup) {
-//   document.addEventListener('keydown', EscListner());
-// }
-
 function closePopup(popup) {
   popup.classList.remove(popupOpenClass);
 }
