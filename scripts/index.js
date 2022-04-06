@@ -18,14 +18,7 @@ const galleryCards = document.querySelector('.gallery__cards');
 const cardElement = document.querySelector('.popup__full-photo');
 const figureCaption = document.querySelector('.popup__figcaption');
 const galleryTemtpate = document.querySelector('.gallery__template').content;
-const validationObj = {
-  formSelector: '.popup__form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit',
-  inactiveButtonClass: 'form__submit_inactive',
-  inputErrorClass: 'form__input_type_error',
-  activeErrorClass: 'form__input-error_active',
-};
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -117,6 +110,8 @@ function escHandler(popup) {
 
 function closePopup(pop) {
   pop.classList.remove(popupOpenClass);
+  // pop.querySelectorAll(inputSelector)
+  
 }
 
 function handlerFormSubmit(evt) {
@@ -132,85 +127,6 @@ popupCloseBtnList.forEach((popupCloseButton) => {
   );
 });
 
-    function enableValidation({
-      formSelector,
-      inputSelector,
-      submitButtonSelector,
-      inactiveButtonClass,
-      inputErrorClass,
-      activeErrorClass
-    }) {
-      const activePopup = document.querySelector(('.' + popupOpenClass));
-      activePopup.querySelectorAll(formSelector).forEach((formElement) => {
-        setEventListeners(
-          formElement,
-          inputSelector,
-          submitButtonSelector,
-          inactiveButtonClass,
-          inputErrorClass,
-          activeErrorClass
-        );
-      });
-    };
-
-const setEventListeners = (
-  formElement,
-  inputSelector,
-  submitButtonSelector,
-  inactiveButtonClass,
-  inputErrorClass,
-  activeErrorClass
-) => {
-  const inputList = Array.from(formElement.querySelectorAll(inputSelector));
-  const buttonElement = formElement.querySelector(submitButtonSelector);
-  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement,inputErrorClass, activeErrorClass);
-      toggleButtonState(inputList, buttonElement, inactiveButtonClass);
-    });
-  });
-};
-
-const showInputError = (
-  formElement,
-  inputElement,
-  errorMessage,
-  inputErrorClass,
-  activeErrorClass
-) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(inputErrorClass);
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add(activeErrorClass);
-};
-
-const hideInputError = (
-  formElement,
-  inputElement,
-  inputErrorClass,
-  activeErrorClass
-) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(inputErrorClass);
-  errorElement.classList.remove(activeErrorClass);
-  errorElement.textContent = '';
-};
-
-const isValid = (formElement, inputElement, inputErrorClass, activeErrorClass, ...rest) => {
-  if (!inputElement.validity.valid) {
-    showInputError(
-      formElement,
-      inputElement,
-      inputElement.validationMessage,
-      inputErrorClass,
-      activeErrorClass
-    );
-  } else {
-    hideInputError(formElement, inputElement, inputErrorClass, activeErrorClass);
-  }
-};
-
 function openProfilePopup() {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
@@ -220,20 +136,6 @@ function openProfilePopup() {
 function openNewCardPopup() {
   openPopup(popupAddCard);
 }
-
-const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactiveButtonClass);
-  } else {
-    buttonElement.classList.remove(inactiveButtonClass);
-  }
-};
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-};
 
 function overlayHandler(pop) {
   pop.addEventListener('click', function (evt) {
