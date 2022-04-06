@@ -1,7 +1,7 @@
 const validationObj = {
   formSelector: '.popup__form',
-  inputSelector: '.popup__form_input',
-  submitButtonSelector: '.popup__form_submit',
+  inputSelector: '.popup__form-input',
+  submitButtonSelector: '.popup__form-submit',
   inactiveButtonClass: 'form__submit_inactive',
   inputErrorClass: 'input_type_error',
   activeErrorClass: 'input-error_active',
