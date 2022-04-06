@@ -101,12 +101,29 @@ function openPopup(popup) {
 }
 
 function escHandler(popup) {
-  document.addEventListener('keydown', function (evt) {
-    if (evt.key === 'Escape') {
-      closePopup(popup);
-    }
-  });
+  document.addEventListener(
+    'keydown',
+    function EscListner(evt) {
+      if (evt.key === 'Escape') {
+        closePopup(popup);
+        console.log('Esc pushed');
+      }
+    },
+    { once: true }
+  );
 }
+
+// function EscListner(evt) {
+//     if (evt.key === 'Escape') {
+//       closePopup(popup);
+//       console.log('Esc pushed');
+//     }
+//     document.removeEventListener('keydown', EscListner());
+//   };
+
+// function escHandler(popup) {
+//   document.addEventListener('keydown', EscListner());
+// }
 
 function closePopup(popup) {
   popup.classList.remove(popupOpenClass);
