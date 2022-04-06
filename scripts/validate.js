@@ -1,10 +1,10 @@
 const validationObj = {
   formSelector: '.popup__form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit',
+  inputSelector: '.popup__form_input',
+  submitButtonSelector: '.popup__form_submit',
   inactiveButtonClass: 'form__submit_inactive',
-  inputErrorClass: 'form__input_type_error',
-  activeErrorClass: 'form__input-error_active',
+  inputErrorClass: 'input_type_error',
+  activeErrorClass: 'input-error_active',
 };
 
 function enableValidation({formSelector, ...rest}) {
