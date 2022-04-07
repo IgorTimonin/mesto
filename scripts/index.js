@@ -108,6 +108,7 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove(popupOpenClass);
   document.removeEventListener('keydown', closeByEscape);
+  newCardForm.reset();
 }
 
 function handlerFormSubmit(evt) {

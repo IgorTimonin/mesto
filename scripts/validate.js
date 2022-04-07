@@ -7,21 +7,16 @@ const validationObj = {
   activeErrorClass: 'input-error_active',
 };
 
-function enableValidation({formSelector, ...rest}) {
-  const activePopup = document.querySelector('.' + popupOpenClass);
-  activePopup.querySelectorAll(formSelector).forEach((formElement) => {
-    setEventListeners(formElement, rest);
-  });
-}
-
-const setEventListeners = (
-  formElement,
-  {inputSelector,
+  function enableValidation (
+  {formSelector,
+  inputSelector,
   submitButtonSelector,
   inactiveButtonClass,
   inputErrorClass,
   activeErrorClass}
-) => {
+) {
+   document.querySelectorAll(formSelector).forEach((formElement) => {
+
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
   toggleButtonState(inputList, buttonElement, inactiveButtonClass);
@@ -30,6 +25,7 @@ const setEventListeners = (
        isValid(formElement, inputElement, inputErrorClass, activeErrorClass);
        toggleButtonState(inputList, buttonElement, inactiveButtonClass);
      });
+   });
    });
 };
 
