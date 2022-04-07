@@ -1,6 +1,6 @@
 .gallery__item {
   max-width: 282px;
-  background-color: #000;
+  background-image: url(../../../images/no_pic.jpg);
   border-radius: 10px;
   overflow: hidden;
   font-size: 0;
