@@ -95,3 +95,5 @@ const hasInvalidInput = (inputList) => {
     return !inputElement.validity.valid;
   });
 };
+
+enableValidation(validationObj);
