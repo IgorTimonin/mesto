@@ -1,6 +1,5 @@
 const popupList = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup-profile');
-const popupOpenClass = 'popup_opened';
 const profileForm = document.querySelector('.popup__profile-form');
 const popupFullSize = document.querySelector('.popup_fullsize');
 const inputName = profileForm.querySelector('.popup__field_type_name');
@@ -9,7 +8,6 @@ const popupAddCard = document.querySelector('.popup-add-card');
 const newCardForm = popupAddCard.querySelector('.popup__newcard-form');
 const cardName = popupAddCard.querySelector('.popup__field_newcard-name');
 const cardAdress = popupAddCard.querySelector('.popup__field_newcard-adress');
-const popupCloseBtn = 'popup__btn-close';
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const newCardBtn = document.querySelector('.profile__add-btn');
@@ -17,6 +15,9 @@ const profileBtn = document.querySelector('.profile__edit-btn');
 const galleryCards = document.querySelector('.gallery__cards');
 const cardElement = document.querySelector('.popup__full-photo');
 const figureCaption = document.querySelector('.popup__figcaption');
+const popupCloseBtn = 'popup__btn-close';
+const popupSubmitClass = '.popup__form-submit';
+const popupOpenClass = 'popup_opened';
 const galleryTemtpate = document.querySelector('.gallery__template').content;
 
 const initialCards = [
@@ -83,9 +84,11 @@ initialPhoto();
 function addNewCard(evt) {
   evt.preventDefault();
   const newCard = { name: cardName.value, link: cardAdress.value };
+  const buttonElement = newCardForm.querySelector(popupSubmitClass);
   renderCard(createCard(newCard));
   closePopup(popupAddCard);
   newCardForm.reset();
+  btnDisabled(buttonElement, validationObj.inactiveButtonClass);
 }
 
 function removeCard(event) {
@@ -108,7 +111,6 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove(popupOpenClass);
   document.removeEventListener('keydown', closeByEscape);
-  newCardForm.reset();
 }
 
 function handlerFormSubmit(evt) {
@@ -128,7 +130,7 @@ function openNewCardPopup() {
   openPopup(popupAddCard);
 }
 
-function CloseByMousedown() {
+function closeByMousedown() {
   popupList.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
       if (evt.target.classList.contains(popupOpenClass)) {
@@ -145,4 +147,4 @@ profileBtn.addEventListener('click', openProfilePopup);
 newCardBtn.addEventListener('click', openNewCardPopup);
 profileForm.addEventListener('submit', handlerFormSubmit);
 newCardForm.addEventListener('submit', addNewCard);
-CloseByMousedown();
+closeByMousedown();
