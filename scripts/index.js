@@ -1,4 +1,4 @@
-// import Card from './card';
+
 const popupList = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup-profile');
 const profileForm = document.querySelector('.popup__profile-form');
@@ -14,12 +14,10 @@ const profileJob = document.querySelector('.profile__job');
 const newCardBtn = document.querySelector('.profile__add-btn');
 const profileBtn = document.querySelector('.profile__edit-btn');
 const galleryCards = document.querySelector('.gallery__cards');
-// const cardElement = document.querySelector('.popup__full-photo');
 const figureCaption = document.querySelector('.popup__figcaption');
 const popupCloseBtn = 'popup__btn-close';
 const popupSubmitClass = '.popup__form-submit';
 const popupOpenClass = 'popup_opened';
-// const galleryTemtpate = document.querySelector('.gallery__template').content;
 const container = galleryCards;
 const initialCards = [
   {
@@ -48,55 +46,21 @@ const initialCards = [
   },
 ];
 
-// function createCard(card) {
-//   const galleryItem = galleryTemtpate
-//     .querySelector('.gallery__item')
-//     .cloneNode(true);
-//   const galleryCard = galleryItem.querySelector('.gallery__img');
-//   galleryCard.src = card.link;
-//   galleryCard.alt = card.name;
-//   galleryItem.querySelector('.gallery__title').textContent = card.name;
-//   imgLike = galleryItem.querySelector('.gallery__like-btn');
-//   imgLike.addEventListener('click', function (evt) {
-//     evt.target.classList.toggle('gallery__like-btn_active');
-//   });
-
-//   galleryCard.addEventListener('click', function openFullPhoto() {
-//     cardElement.src = card.link;
-//     cardElement.alt = card.name;
-//     figureCaption.textContent = card.name;
-//     openPopup(popupFullSize);
-//   });
-//   deletBtn = galleryItem.querySelector('.gallery__delete-btn');
-//   deletBtn.addEventListener('click', removeCard);
-//   return galleryItem;
-// }
-
-// function renderCard(card) {
-//   galleryCards.prepend(card);
-// }
-
-  function _renderCard(card) {
-    galleryCards.prepend(card);
+  function _renderCard(newCard) {
+    const card = new Card(newCard);
+    const cardElement = card._generateCard();
+    galleryCards.prepend(cardElement);
 }
 
-// function initialPhoto() {
-//   const photoCards = initialCards.map(createCard);
-//   galleryCards.append(...photoCards);
-// }
-// initialPhoto();
-
 initialCards.forEach((item) => {
-  const card = new Card(item);
-  const cardElement = card._generateCard();
-  galleryCards.append(cardElement);
+  _renderCard(item);
 });
 
 function addNewCard(evt) {
   evt.preventDefault();
   const newCard = { name: cardName.value, link: cardAdress.value };
   const buttonElement = newCardForm.querySelector(popupSubmitClass);
-  renderCard(createCard(newCard));
+  _renderCard(newCard);
   closePopup(popupAddCard);
   newCardForm.reset();
   btnDisabled(buttonElement, validationObj.inactiveButtonClass);
