@@ -1,12 +1,12 @@
 class Card {
-  static _galleryTemtpate = document.querySelector('.gallery__template').content;
-  constructor(data) {
+  constructor(data, template) {
     this._name = data.name;
     this._image = data.link;
+    this._galleryTemplate = template;
   }
 
   _getTemplate() {
-    const _galleryItem = Card._galleryTemtpate.querySelector('.gallery__item').cloneNode(true);
+    const _galleryItem = this._galleryTemplate.cloneNode(true).querySelector('.gallery__item');
     return _galleryItem;
   }
 
@@ -32,6 +32,6 @@ class Card {
     const deleteBtn = this._element.querySelector('.gallery__delete-btn');
     deleteBtn.addEventListener('click', removeCard);
 
-    return this._element; 
+    return this._element;
   }
 }

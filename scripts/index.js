@@ -15,10 +15,11 @@ const newCardBtn = document.querySelector('.profile__add-btn');
 const profileBtn = document.querySelector('.profile__edit-btn');
 const galleryCards = document.querySelector('.gallery__cards');
 const figureCaption = document.querySelector('.popup__figcaption');
+const galleryTemplate = document.querySelector('.gallery__template').content;
 const popupCloseBtn = 'popup__btn-close';
 const popupSubmitClass = '.popup__form-submit';
 const popupOpenClass = 'popup_opened';
-const container = galleryCards;
+// const container = galleryCards;
 const initialCards = [
   {
     name: 'Архыз',
@@ -47,13 +48,13 @@ const initialCards = [
 ];
 
   function _renderCard(newCard) {
-    const card = new Card(newCard);
+    const card = new Card(newCard, galleryTemplate);
     const cardElement = card._generateCard();
     galleryCards.prepend(cardElement);
 }
 
 initialCards.forEach((item) => {
-  _renderCard(item);
+  _renderCard(item, galleryTemplate);
 });
 
 function addNewCard(evt) {
