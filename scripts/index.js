@@ -1,4 +1,4 @@
-
+import { Card } from './card.js';
 const popupList = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup-profile');
 const profileForm = document.querySelector('.popup__profile-form');
@@ -19,7 +19,15 @@ const galleryTemplate = document.querySelector('.gallery__template').content;
 const popupCloseBtn = 'popup__btn-close';
 const popupSubmitClass = '.popup__form-submit';
 const popupOpenClass = 'popup_opened';
-// const container = galleryCards;
+const formSelector = '.popup__form';
+// const validationObj = {
+//   // formSelector: '.popup__form',
+//   inputSelector: '.popup__form-input',
+//   submitButtonSelector: '.popup__form-submit',
+//   inactiveButtonClass: 'popup__form_submit_inactive',
+//   inputErrorClass: 'input_type_error',
+//   activeErrorClass: 'input-error_active',
+// };
 const initialCards = [
   {
     name: 'Архыз',
@@ -48,7 +56,7 @@ const initialCards = [
 ];
 
   function _renderCard(newCard) {
-    const card = new Card(newCard, galleryTemplate);
+    const card = new Card(newCard, galleryTemplate, openFullPhoto);
     const cardElement = card._generateCard();
     galleryCards.prepend(cardElement);
 }
@@ -67,11 +75,6 @@ function addNewCard(evt) {
   btnDisabled(buttonElement, validationObj.inactiveButtonClass);
 }
 
-function removeCard(event) {
-  const card = event.currentTarget.closest('.gallery__item');
-  card.remove();
-}
-
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.' + popupOpenClass);
@@ -83,6 +86,14 @@ function openPopup(popup) {
   popup.classList.add(popupOpenClass);
   document.addEventListener('keydown', closeByEscape);
 } 
+
+function openFullPhoto(image, name) {
+        const cardElement = document.querySelector('.popup__full-photo');
+        cardElement.src = image;
+        cardElement.alt = name;
+        figureCaption.textContent = name;
+        openPopup(popupFullSize);
+      };
 
 function closePopup(popup) {
   popup.classList.remove(popupOpenClass);

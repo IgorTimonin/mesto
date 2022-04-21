@@ -1,12 +1,15 @@
-class Card {
-  constructor(data, template) {
+export class Card {
+  constructor(data, template, openFullPhoto) {
     this._name = data.name;
     this._image = data.link;
     this._galleryTemplate = template;
+    this._fullphoto = openFullPhoto;
   }
 
   _getTemplate() {
-    const _galleryItem = this._galleryTemplate.cloneNode(true).querySelector('.gallery__item');
+    const _galleryItem = this._galleryTemplate
+      .cloneNode(true)
+      .querySelector('.gallery__item');
     return _galleryItem;
   }
 
@@ -16,22 +19,19 @@ class Card {
     this._element.querySelector('.gallery__img').alt = this._name;
     this._element.querySelector('.gallery__title').textContent = this._name;
     const imgLike = this._element.querySelector('.gallery__like-btn');
-    imgLike.addEventListener('click', function (evt) {
-      evt.target.classList.toggle('gallery__like-btn_active');
+    imgLike.addEventListener('click', () => {
+      imgLike.classList.toggle('gallery__like-btn_active');
     });
 
     this._element
       .querySelector('.gallery__img')
-      .addEventListener('click', function openFullPhoto() {
-        const cardElement = document.querySelector('.popup__full-photo');
-        cardElement.src = this.currentSrc;
-        cardElement.alt = this.alt;
-        figureCaption.textContent = this.alt;
-        openPopup(popupFullSize);
-      });
+      .addEventListener('click', () => this._fullphoto(this._image, this._name));
+    
     const deleteBtn = this._element.querySelector('.gallery__delete-btn');
-    deleteBtn.addEventListener('click', removeCard);
+    deleteBtn.addEventListener('click', () => {
+      this._element.remove();
+    });
 
     return this._element;
   }
-}
+};
