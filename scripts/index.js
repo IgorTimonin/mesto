@@ -16,6 +16,7 @@ const newCardBtn = document.querySelector('.profile__add-btn');
 const profileBtn = document.querySelector('.profile__edit-btn');
 const galleryCards = document.querySelector('.gallery__cards');
 const figureCaption = document.querySelector('.popup__figcaption');
+const popupFullphoto = document.querySelector('.popup__full-photo');
 const galleryTemplate = document.querySelector('.gallery__template').content;
 const popupCloseBtn = 'popup__btn-close';
 const popupOpenClass = 'popup_opened';
@@ -54,28 +55,34 @@ const initialCards = [
   },
 ];
 
-function activateValidation(formSelector) {
-  document.querySelectorAll(formSelector).forEach((form) => {
-    new FormValidator(validationObj, form).enableValidation();
+const formValidators = {};
+const enableValidation = (validationObj) => {
+  const formList = Array.from(
+    document.querySelectorAll(validationObj.formSelector)
+  );
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(validationObj, formElement);
+    formValidators[formElement.name] = validator;
+    validator.enableValidation();
   });
-}
+};
 
-activateValidation(validationObj.formSelector);
+enableValidation(validationObj);
 
-function _renderCard(newCard) {
+function renderCard(newCard) {
   const card = new Card(newCard, galleryTemplate, openFullPhoto);
   const cardElement = card._generateCard();
   galleryCards.prepend(cardElement);
 }
 
 initialCards.forEach((item) => {
-  _renderCard(item, galleryTemplate);
+  renderCard(item, galleryTemplate);
 });
 
 function addNewCard(evt) {
   evt.preventDefault();
   const newCard = { name: cardName.value, link: cardAdress.value };
-  _renderCard(newCard);
+  renderCard(newCard);
   closePopup(popupAddCard);
   newCardForm.reset();
 }
@@ -93,9 +100,8 @@ function openPopup(popup) {
 }
 
 function openFullPhoto(image, name) {
-  const cardElement = document.querySelector('.popup__full-photo');
-  cardElement.src = image;
-  cardElement.alt = name;
+  popupFullphoto.src = image;
+  popupFullphoto.alt = name;
   figureCaption.textContent = name;
   openPopup(popupFullSize);
 }
@@ -115,13 +121,13 @@ function handlerFormSubmit(evt) {
 function openProfilePopup() {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
-  new FormValidator(validationObj, profileForm).resetValidation();
+  formValidators[profileForm.name].resetValidation();
   openPopup(popupProfile);
 }
 
 function openNewCardPopup() {
   newCardForm.reset();
-  new FormValidator(validationObj, newCardForm).resetValidation();
+  formValidators[newCardForm.name].resetValidation();
   openPopup(popupAddCard);
 }
 
