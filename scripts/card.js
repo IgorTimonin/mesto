@@ -18,17 +18,17 @@ export class Card {
     this._element.querySelector('.gallery__img').src = this._image;
     this._element.querySelector('.gallery__img').alt = this._name;
     this._element.querySelector('.gallery__title').textContent = this._name;
-    const imgLike = this._element.querySelector('.gallery__like-btn');
-    imgLike.addEventListener('click', () => {
-      imgLike.classList.toggle('gallery__like-btn_active');
+    const _imgLike = this._element.querySelector('.gallery__like-btn');
+    _imgLike.addEventListener('click', () => {
+      _imgLike.classList.toggle('gallery__like-btn_active');
     });
 
     this._element
       .querySelector('.gallery__img')
       .addEventListener('click', () => this._fullphoto(this._image, this._name));
     
-    const deleteBtn = this._element.querySelector('.gallery__delete-btn');
-    deleteBtn.addEventListener('click', () => {
+    const _deleteBtn = this._element.querySelector('.gallery__delete-btn');
+    _deleteBtn.addEventListener('click', () => {
       this._element.remove();
     });
 

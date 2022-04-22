@@ -1,4 +1,5 @@
 import { Card } from './card.js';
+import { FormValidator } from './FormValidator.js';
 const popupList = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup-profile');
 const profileForm = document.querySelector('.popup__profile-form');
@@ -19,15 +20,14 @@ const galleryTemplate = document.querySelector('.gallery__template').content;
 const popupCloseBtn = 'popup__btn-close';
 const popupSubmitClass = '.popup__form-submit';
 const popupOpenClass = 'popup_opened';
-const formSelector = '.popup__form';
-// const validationObj = {
-//   // formSelector: '.popup__form',
-//   inputSelector: '.popup__form-input',
-//   submitButtonSelector: '.popup__form-submit',
-//   inactiveButtonClass: 'popup__form_submit_inactive',
-//   inputErrorClass: 'input_type_error',
-//   activeErrorClass: 'input-error_active',
-// };
+const validationObj = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__form-input',
+  submitButtonSelector: '.popup__form-submit',
+  inactiveButtonClass: 'popup__form_submit_inactive',
+  inputErrorClass: 'input_type_error',
+  activeErrorClass: 'input-error_active',
+};
 const initialCards = [
   {
     name: 'Архыз',
@@ -55,6 +55,14 @@ const initialCards = [
   },
 ];
 
+function activateValidation(formSelector) {
+  document.querySelectorAll(formSelector).forEach((form) => {
+    new FormValidator(validationObj,form).enableValidation();
+  });
+};
+
+ activateValidation(validationObj.formSelector);
+
   function _renderCard(newCard) {
     const card = new Card(newCard, galleryTemplate, openFullPhoto);
     const cardElement = card._generateCard();
@@ -72,7 +80,7 @@ function addNewCard(evt) {
   _renderCard(newCard);
   closePopup(popupAddCard);
   newCardForm.reset();
-  btnDisabled(buttonElement, validationObj.inactiveButtonClass);
+  FormValidator.btnDisabled(buttonElement, validationObj.inactiveButtonClass);
 }
 
 function closeByEscape(evt) {
