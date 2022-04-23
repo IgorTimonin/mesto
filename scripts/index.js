@@ -1,3 +1,4 @@
+import { initialCards } from './initialCards.js';
 import { Card } from './card.js';
 import { FormValidator } from './FormValidator.js';
 const popupList = document.querySelectorAll('.popup');
@@ -28,32 +29,6 @@ const validationObj = {
   inputErrorClass: 'input_type_error',
   activeErrorClass: 'input-error_active',
 };
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-];
 
 const formValidators = {};
 const enableValidation = (validationObj) => {
@@ -69,10 +44,14 @@ const enableValidation = (validationObj) => {
 
 enableValidation(validationObj);
 
-function renderCard(newCard) {
+function newCardMaker(newCard) {
   const card = new Card(newCard, galleryTemplate, openFullPhoto);
   const cardElement = card._generateCard();
-  galleryCards.prepend(cardElement);
+  return cardElement;
+}
+
+function renderCard(newCard) {
+  galleryCards.prepend(newCardMaker(newCard));
 }
 
 initialCards.forEach((item) => {
