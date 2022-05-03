@@ -2,8 +2,12 @@ import { initialCards } from '../components/initialCards.js';
 import { Card } from '../components/card.js';
 import { Section } from '../components/Section.js';
 import { FormValidator } from '../components/FormValidator.js';
+import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 const popupList = document.querySelectorAll('.popup');
-const popupSelector = document.querySelector('.popup');
+// const popupSelector = document.querySelector('.popup');
+const popupSelector = '.popup';
 const popupProfile = document.querySelector('.popup-profile');
 const profileForm = document.querySelector('.popup__profile-form');
 const popupFullSize = document.querySelector('.popup_fullsize');
@@ -32,8 +36,24 @@ const validationObj = {
   activeErrorClass: 'input-error_active',
 };
 
+// function handleCardClick() {
+//   popupFullphoto.src = this.currentSrc;
+//   popupFullphoto.alt = this.alt;
+//   figureCaption.textContent = this.alt;
+//   popupFullSize.classList.add(popupOpenClass);
+// }
+
+// const popup = new PopupWithForm();
+const fullPhoto = new PopupWithImage(popupFullSize);
+fullPhoto._setEventListeners();
+
+function handleCardClick() {
+  
+    fullPhoto.open(this.src, this.alt);
+}
+
 function newCardMaker(items) {
-    const card = new Card(items, galleryTemplate);
+    const card = new Card(items, galleryTemplate, handleCardClick);
     const cardElement = card._generateCard();
     return cardElement;
   }
@@ -60,20 +80,6 @@ const enableValidation = (validationObj) => {
 
 enableValidation(validationObj);
 
-// function newCardMaker(newCard) {
-//   const card = new Card(newCard, galleryTemplate, openFullPhoto);
-//   const cardElement = card._generateCard();
-//   return cardElement;
-// }
-
-// function renderCard(newCard) {
-//   galleryCards.prepend(newCardMaker(newCard));
-// }
-
-// initialCards.forEach((item) => {
-//   renderCard(item);
-// });
-
 // function addNewCard(evt) {
 //   evt.preventDefault();
 //   const newCard = { name: cardName.value, link: cardAdress.value };
@@ -86,7 +92,6 @@ function addNewCard(evt) {
   evt.preventDefault();
   const newCard = { name: cardName.value, link: cardAdress.value };
   newCardMaker(newCard);
-  closePopup(popupAddCard);
   newCardForm.reset();
 }
 
@@ -95,18 +100,6 @@ function addNewCard(evt) {
 //     const openedPopup = document.querySelector('.' + popupOpenClass);
 //     closePopup(openedPopup);
 //   }
-// }
-
-// function openPopup(popup) {
-//   popup.classList.add(popupOpenClass);
-//   document.addEventListener('keydown', closeByEscape);
-// }
-
-// function openFullPhoto(image, name) {
-//   popupFullphoto.src = image;
-//   popupFullphoto.alt = name;
-//   figureCaption.textContent = name;
-//   openPopup(popupFullSize);
 // }
 
 function closePopup(popup) {
@@ -127,18 +120,25 @@ function handlerFormSubmit(evt) {
   profileJob.textContent = inputJob.value;
 }
 
-function openProfilePopup() {
-  inputName.value = profileName.textContent;
-  inputJob.value = profileJob.textContent;
-  formValidators[profileForm.name].resetValidation();
-  openPopup(popupProfile);
-}
+// function openProfilePopup() {
+//   inputName.value = profileName.textContent;
+//   inputJob.value = profileJob.textContent;
+//   formValidators[profileForm.name].resetValidation();
+//   openPopup(popupProfile);
+// }
 
-function openNewCardPopup() {
-  newCardForm.reset();
-  formValidators[newCardForm.name].resetValidation();
-  openPopup(popupAddCard);
-}
+  // const newCardPopup = new PopupWithForm(popupSelector, addNewCard());
+  
+  newCardBtn.addEventListener('click', function () {
+
+    newCardPopup.open();
+  });
+
+// function openNewCardPopup() {
+//   newCardForm.reset();
+//   formValidators[newCardForm.name].resetValidation();
+//   openPopup(popupAddCard);
+// }
 
 // function closeByMousedown() {
 //   popupList.forEach((popup) => {
@@ -153,8 +153,8 @@ function openNewCardPopup() {
 //   });
 // }
 
-profileBtn.addEventListener('click', openProfilePopup);
-newCardBtn.addEventListener('click', openNewCardPopup);
+// profileBtn.addEventListener('click', openProfilePopup);
+// newCardBtn.addEventListener('click', openNewCardPopup);
 profileForm.addEventListener('submit', handlerFormSubmit);
 newCardForm.addEventListener('submit', addNewCard);
 // closeByMousedown();

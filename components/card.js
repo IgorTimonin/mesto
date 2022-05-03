@@ -4,13 +4,14 @@
 //     this._image = data.link;
 //     this._galleryTemplate = template;
 //     this._fullphoto = openFullPhoto;
-//   }
+//   }// 
 
 export class Card {
-  constructor(data, template) {
+  constructor(data, template, handleCardClick) {
     this._name = data.name;
     this._image = data.link;
     this._galleryTemplate = template;
+    this.handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -30,11 +31,9 @@ export class Card {
       _imgLike.classList.toggle('gallery__like-btn_active');
     });
 
-    // this._element
-    //   .querySelector('.gallery__img')
-    //   .addEventListener('click', () =>
-    //     this._fullphoto(this._image, this._name)
-    //   );
+    this._element
+      .querySelector('.gallery__img')
+      .addEventListener('click', this.handleCardClick);
 
     const _deleteBtn = this._element.querySelector('.gallery__delete-btn');
     _deleteBtn.addEventListener('click', () => {
