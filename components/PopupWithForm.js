@@ -1,13 +1,16 @@
 import Popup from './Popup.js';
 export default class PopupWithImage extends Popup {
-  constructor(popupSelector, func) {
+  constructor(popupSelector, handlerSubmit) {
     super(popupSelector);
-    this._handlerFormSubmit = func;
+    this._handlerFormSubmit = handlerSubmit;
     this._form = popupSelector.querySelector('.popup__form');
+    this._formInput = popupSelector.querySelectorAll('.popup__form-input');
     this.submitBtn = this._form.querySelector('.popup__form-submit')
   }
 
-  _getInputValues() {}
+  _getInputValues() {
+    
+  }
 
   close() {
     super.close();
@@ -17,12 +20,10 @@ export default class PopupWithImage extends Popup {
   _setEventListeners() {
     super._setEventListeners();
     
-   this._form.addEventListener('submit', (evt) => {
+    this._form.addEventListener('submit', (evt) => {
         evt.preventDefault();
         this._handlerFormSubmit();
         this.close.bind(super.close());
-      });
-    
-        this.close.bind(super.close());
+    });
   }
 }

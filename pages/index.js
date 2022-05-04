@@ -2,6 +2,7 @@ import { initialCards } from '../components/initialCards.js';
 import { Card } from '../components/card.js';
 import { Section } from '../components/Section.js';
 import { FormValidator } from '../components/FormValidator.js';
+import { UserInfo } from '../components/UserInfo';
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -36,15 +37,18 @@ const validationObj = {
   activeErrorClass: 'input-error_active',
 };
 
+const userInfo = new UserInfo({ userName: profileName, userInfo: profileJob });
+
 const popupForm = new PopupWithForm(popupProfile, handlerFormSubmit);
 
-const AddCard = new PopupWithForm(popupAddCard, addNewCard);
+const addCard = new PopupWithForm(popupAddCard, addNewCard);
 
 const fullPhoto = new PopupWithImage(popupFullSize);
 
 fullPhoto._setEventListeners();
 popupForm._setEventListeners();
-AddCard._setEventListeners();
+addCard._setEventListeners();
+userInfo._getUserInfo();
 
 profileBtn.addEventListener('click', () => {
   popupForm.open();
@@ -52,7 +56,7 @@ profileBtn.addEventListener('click', () => {
 });
 
 newCardBtn.addEventListener('click', () => {
-  AddCard.open();
+  addCard.open();
   formValidators[newCardForm.name].resetValidation();
 });
 
@@ -92,13 +96,6 @@ const enableValidation = (validationObj) => {
 };
 
 enableValidation(validationObj);
-
-// function closeByEscape(evt) {
-//   if (evt.key === 'Escape') {
-//     const openedPopup = document.querySelector('.' + popupOpenClass);
-//     closePopup(openedPopup);
-//   }
-// }
 
 function handlerFormSubmit() {
   profileName.textContent = inputName.value;

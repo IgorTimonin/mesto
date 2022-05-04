@@ -1,11 +1,3 @@
-// export class Card {
-//   constructor(data, template, openFullPhoto) {
-//     this._name = data.name;
-//     this._image = data.link;
-//     this._galleryTemplate = template;
-//     this._fullphoto = openFullPhoto;
-//   }// 
-
 export class Card {
   constructor(data, template, handleCardClick) {
     this._name = data.name;
