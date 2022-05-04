@@ -1,24 +1,28 @@
 import Popup from './Popup.js';
 export default class PopupWithImage extends Popup {
-  constructor(popupSelector, formSubmit) {
+  constructor(popupSelector, func) {
     super(popupSelector);
-    this_formSubmit = formSubmit;
+    this._handlerFormSubmit = func;
+    this._form = popupSelector.querySelector('.popup__form');
+    this.submitBtn = this._form.querySelector('.popup__form-submit')
   }
 
   _getInputValues() {}
 
-  open() {}
-
-  close() {}
+  close() {
+    super.close();
+    this._form.reset();
+  }
 
   _setEventListeners() {
-    // при сабмите формы
-    this._element.addEventListener('submit', (evt) => {
-      // отменим стандартное поведение
-      evt.preventDefault();
-
-      // и сбросим её поля
-      this._element.reset();
-    });
+    super._setEventListeners();
+    
+   this._form.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+        this._handlerFormSubmit();
+        this.close.bind(super.close());
+      });
+    
+        this.close.bind(super.close());
   }
 }
