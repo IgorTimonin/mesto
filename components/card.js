@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
   constructor(data, template, handleCardClick) {
     this._name = data.name;
     this._image = data.link;
@@ -15,17 +15,16 @@ export class Card {
 
   _generateCard() {
     this._element = this._getTemplate();
-    this._element.querySelector('.gallery__img').src = this._image;
-    this._element.querySelector('.gallery__img').alt = this._name;
+    this._galleryImg = this._element.querySelector('.gallery__img');
+    this._galleryImg.src = this._image;
+    this._galleryImg.alt = this._name;
     this._element.querySelector('.gallery__title').textContent = this._name;
     const _imgLike = this._element.querySelector('.gallery__like-btn');
     _imgLike.addEventListener('click', () => {
       _imgLike.classList.toggle('gallery__like-btn_active');
     });
 
-    this._element
-      .querySelector('.gallery__img')
-      .addEventListener('click', this.handleCardClick);
+    this._galleryImg.addEventListener('click', this.handleCardClick);
 
     const _deleteBtn = this._element.querySelector('.gallery__delete-btn');
     _deleteBtn.addEventListener('click', () => {

@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(data, form) {
     this._formSelector = data.formSelector;
     this._inputSelector = data.inputSelector;
@@ -77,6 +77,4 @@ class FormValidator {
       this.buttonElement.removeAttribute('disabled', 'disabled');
     }
   };
-}
-
-export { FormValidator };
+};
