@@ -1,3 +1,4 @@
+import './index.css';
 import { initialCards } from '../components/initialCards.js';
 import Card from '../components/card.js';
 import Section from '../components/Section.js';
@@ -35,18 +36,21 @@ popupUser._setEventListeners();
 addCard._setEventListeners();
 
 function handleCardClick() {
-    fullPhoto.open(this.src, this.alt);
+  fullPhoto.open(this.src, this.alt);
 }
 
 //создание разметки карточки
 function newCardMaker(items) {
-    const card = new Card(items, galleryTemplate, handleCardClick);
-    const cardElement = card._generateCard();
-    return cardElement;
-  }
+  const card = new Card(items, galleryTemplate, handleCardClick);
+  const cardElement = card._generateCard();
+  return cardElement;
+}
 
 //отрисовка дефолтных карточек
-const defaultCards = new Section({ items: initialCards, renderer: newCardMaker }, galleryCards);
+const defaultCards = new Section(
+  { items: initialCards, renderer: newCardMaker },
+  galleryCards
+);
 defaultCards.renderAll();
 
 //наложение валидации на все формы
@@ -79,7 +83,7 @@ function userFormSubmit({ firstInput, secondInput }) {
     userName: firstInput,
     userinfo: secondInput,
   });
-};
+}
 
 //открытие popup профайла пользователя
 profileBtn.addEventListener('click', () => {
