@@ -1,6 +1,6 @@
 import './index.css';
 import { initialCards } from '../components/initialCards.js';
-import Card from '../components/card.js';
+import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
@@ -31,9 +31,9 @@ const popupUser = new PopupWithForm(popupProfile, userFormSubmit);
 const addCard = new PopupWithForm(popupAddCard, newCardSubmit);
 const fullPhoto = new PopupWithImage(popupFullSize);
 
-fullPhoto._setEventListeners();
-popupUser._setEventListeners();
-addCard._setEventListeners();
+fullPhoto.setEventListeners();
+popupUser.setEventListeners();
+addCard.setEventListeners();
 
 function handleCardClick() {
   fullPhoto.open(this.src, this.alt);
@@ -70,20 +70,17 @@ enableValidation(validationObj);
 
 //обработчик submit формы добавления карточки
 function newCardSubmit(CardObj) {
-  const newSection = new Section(
-    { items: CardObj, renderer: newCardMaker },
-    galleryCards
-  );
-  newSection.addItem(CardObj);
+  // const newSection = new Section(
+  //   { items: CardObj, renderer: newCardMaker },
+  //   galleryCards
+  // );
+  defaultCards.addItem(CardObj);
 }
 
 //обработчик submit формы пользователя
-function userFormSubmit({ firstInput, secondInput }) {
-  userInfo.setUserInfo({
-    userName: firstInput,
-    userinfo: secondInput,
-  });
-}
+function userFormSubmit() {
+  userInfo.setUserInfo(popupUser._getInputValues());
+};
 
 //открытие popup профайла пользователя
 profileBtn.addEventListener('click', () => {

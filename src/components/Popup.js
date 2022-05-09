@@ -6,24 +6,22 @@ export default class Popup {
 
   open() {
     this._popupSelector.classList.add('popup_opened');
-    document.addEventListener('keydown', this._handleEscClose, {once: true});
+    document.addEventListener('keydown', this._handleEscClose);
   }
 
   close() {
-    document.removeEventListener('keydown', this._handleEscClose);
     this._popupSelector.classList.remove('popup_opened');
-    
+    document.removeEventListener('keydown', this._handleEscClose);
   }
 
   //закрытие по нажатию Esc
-  _handleEscClose(evt) {
+  _handleEscClose = (evt) => {
     if (evt.key === 'Escape') {
-        console.log('Esc');
-      document.querySelector('.popup_opened').classList.remove('popup_opened');
+      this.close();
     }
-  }
+  };
 
-  _setEventListeners() {
+  setEventListeners() {
     //закрытие по кнопке закрытия
     this.popupCloseBtn.addEventListener('click', () => {
       this.close();
@@ -31,9 +29,6 @@ export default class Popup {
     //закрытие по клику вне активного окна
     this._popupSelector.addEventListener('mousedown', (evt) => {
       if (evt.target.classList.contains('popup_opened')) {
-        this.close();
-      }
-      if (evt.target.classList.contains(this.popupCloseBtn)) {
         this.close();
       }
     });
