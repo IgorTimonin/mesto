@@ -25,7 +25,7 @@ export default class Card {
     });
   }
 
-  _generateCard() {
+  generateCard() {
     this._element = this._getTemplate();
     this._galleryImg = this._element.querySelector('.gallery__img');
     this._galleryImg.src = this._image;

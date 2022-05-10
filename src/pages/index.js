@@ -42,7 +42,7 @@ function handleCardClick() {
 //создание разметки карточки
 function newCardMaker(items) {
   const card = new Card(items, galleryTemplate, handleCardClick);
-  const cardElement = card._generateCard();
+  const cardElement = card.generateCard();
   return cardElement;
 }
 
@@ -70,21 +70,17 @@ enableValidation(validationObj);
 
 //обработчик submit формы добавления карточки
 function newCardSubmit(CardObj) {
-  // const newSection = new Section(
-  //   { items: CardObj, renderer: newCardMaker },
-  //   galleryCards
-  // );
   defaultCards.addItem(CardObj);
 }
 
 //обработчик submit формы пользователя
-function userFormSubmit() {
-  userInfo.setUserInfo(popupUser._getInputValues());
+function userFormSubmit(userData) {
+  userInfo.setUserInfo(userData);
 };
 
 //открытие popup профайла пользователя
 profileBtn.addEventListener('click', () => {
-  popupUser._setInputValues(userInfo.getUserInfo());
+  popupUser.setInputValues(userInfo.getUserInfo());
   popupUser.open();
   formValidators[profileForm.name].resetValidation();
 });
