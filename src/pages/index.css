@@ -36,3 +36,42 @@
 @import url(../blocks/input-error/input-error.css);
 @import url(../blocks/input-error/_active/input-error_active.css);
 @import url(../blocks/input_type_error/input_type_error.css);
+
+.gallery__like-qty {
+  margin: 3px 0 0 0;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #000000;
+  align-self: center;
+}
+
+.gallery_like {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+}
+
+.profile__avatar-container {
+  margin-right: 30px;
+}
+
+.profile__avatar-container:hover {
+  /* opacity: 0.2;
+  cursor: pointer;
+  transition: linear 0.3s; */
+  background-image: url(/src/images/vector.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.avatar-opacity:hover {
+  opacity: 0.2;
+  cursor: pointer;
+  transition: linear 0.3s;
+}
+

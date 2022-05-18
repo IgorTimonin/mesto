@@ -12,11 +12,13 @@
     </header>
     <main>
       <section class="profile">
+        <div class="profile__avatar-container">
         <img
-          class="profile__avatar"
+          class="profile__avatar avatar-opacity"
           src="<%=require('./images/Kusto.jpg')%>"
           alt="Аватар пользователя"
         />
+        </div>
         <div class="profile__info">
           <div class="profile__container">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -41,7 +43,10 @@
               />
               <div class="gallery__text">
                 <h2 class="gallery__title"></h2>
+                <div class="gallery_like">
                 <button class="gallery__like-btn" type="button"></button>
+                <div class="gallery__like-qty">66</div>
+                </div>
               </div>
             </li>
           </template>
@@ -51,6 +56,40 @@
     <footer class="footer">
       <p class="footer__copyright">&copy;2022 Игорь Тимонин</p>
     </footer>
+    <div class="popup popup-submit">
+      <div class="popup__container">
+        <button class="popup__btn-close btn-opacity" type="button"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button class="popup__btn-save popup__form-submit" type="submit">Да</button>
+      </div>  
+    </div>
+    <div class="popup popup-avatar">
+      <div class="popup__container">
+        <button class="popup__btn-close btn-opacity" type="button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form
+          class="popup__form popup__avatar-form"
+          name="avatar-form"
+          action="#"
+          novalidate
+        >
+          <input
+            id="avatar-input"
+            class="popup__field popup__field_type_name popup__form-input"
+            type="text"
+            value=""
+            name="avatar-img"
+            placeholder="Введите адрес картинки"
+            minlength="2"
+            maxlength="40"
+            required
+            autocomplete="off"
+          />
+          <span class="name-input-error input-error">Вы пропустили это поле.</span>
+          <button class="popup__btn-save popup__form-submit" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
     <div class="popup popup-profile">
       <div class="popup__container">
         <button class="popup__btn-close btn-opacity" type="button"></button>
