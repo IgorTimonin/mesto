@@ -12,13 +12,14 @@
     </header>
     <main>
       <section class="profile">
-        <div class="profile__avatar-container">
+        <button class="profile__avatar-btn">
         <img
-          class="profile__avatar avatar-opacity"
-          src="<%=require('./images/Kusto.jpg')%>"
+          class="profile__avatar profile__avatar_opacity"
+          src="<%=require('./images/elbrus.jpg')%>"
+          
           alt="Аватар пользователя"
         />
-        </div>
+        </button>
         <div class="profile__info">
           <div class="profile__container">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -63,7 +64,7 @@
         <button class="popup__btn-save popup__form-submit" type="submit">Да</button>
       </div>  
     </div>
-    <div class="popup popup-avatar">
+    <div class="popup popup__avatar">
       <div class="popup__container">
         <button class="popup__btn-close btn-opacity" type="button"></button>
         <h2 class="popup__title">Обновить аватар</h2>
@@ -74,18 +75,16 @@
           novalidate
         >
           <input
-            id="avatar-input"
-            class="popup__field popup__field_type_name popup__form-input"
-            type="text"
+            id="avatar-url-input"
+            class="popup__field popup__field_newcard-adress popup__form-input"
+            type="url"
             value=""
-            name="avatar-img"
-            placeholder="Введите адрес картинки"
-            minlength="2"
-            maxlength="40"
+            name="avatar-adress"
+            placeholder="Ссылка на картинку"
             required
             autocomplete="off"
           />
-          <span class="name-input-error input-error">Вы пропустили это поле.</span>
+          <span class="avatar-url-input-error input-error">Введите адрес аватара.</span>
           <button class="popup__btn-save popup__form-submit" type="submit">Сохранить</button>
         </form>
       </div>
@@ -105,7 +104,7 @@
             class="popup__field popup__field_type_name popup__form-input"
             type="text"
             value="Жак-Ив Кусто"
-            name="user-name"
+            name="name"
             placeholder="Введите имя"
             minlength="2"
             maxlength="40"
@@ -118,7 +117,7 @@
             class="popup__field popup__field_type_job popup__form-input"
             type="text"
             value="Исследователь океана"
-            name="user-job"
+            name="about"
             placeholder="Введите род деятельности"
             minlength="2"
             maxlength="200"
@@ -145,7 +144,7 @@
             class="popup__field popup__field_newcard-name popup__form-input"
             type="text"
             value=""
-            name="card-name"
+            name="cardName"
             placeholder="Название"
             minlength="2"
             maxlength="30"
@@ -158,7 +157,7 @@
             class="popup__field popup__field_newcard-adress popup__form-input"
             type="url"
             value=""
-            name="card-adress"
+            name="cardAdress"
             placeholder="Ссылка на картинку"
             required
             autocomplete="off"

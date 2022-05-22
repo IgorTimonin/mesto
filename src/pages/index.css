@@ -56,20 +56,22 @@
   flex-wrap: nowrap;
 }
 
-.profile__avatar-container {
+.profile__avatar-btn {
   margin-right: 30px;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
 }
 
-.profile__avatar-container:hover {
-  /* opacity: 0.2;
-  cursor: pointer;
-  transition: linear 0.3s; */
+.profile__avatar-btn:hover {
   background-image: url(/src/images/vector.svg);
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.avatar-opacity:hover {
+.profile__avatar_opacity:hover {
   opacity: 0.2;
   cursor: pointer;
   transition: linear 0.3s;

@@ -13,7 +13,7 @@ export default class UserInfo {
   }
 
   setUserInfo(userData) {
-    this._userName.textContent = Object.values(userData)[0];
-    this._userInfo.textContent = Object.values(userData)[1];
+    this._userName.textContent = userData.name;
+    this._userInfo.textContent = userData.about;
   }
 }

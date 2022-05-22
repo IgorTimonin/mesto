@@ -1,10 +1,9 @@
-import Popup from './Popup.js';
-export default class PopupWithSubmit extends Popup {
+import PopupWithForm from './PopupWithForm';
+export default class PopupAvatar extends PopupWithForm {
   constructor(popupSelector, handlerFormSubmit) {
     super(popupSelector);
     this._handlerFormSubmit = handlerFormSubmit;
   }
-
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
