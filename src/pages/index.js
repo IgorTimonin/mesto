@@ -23,7 +23,9 @@ const popupAvatar = document.querySelector('.popup__avatar');
 const avatarForm = popupAvatar.querySelector('.popup__avatar-form');
 const galleryCards = document.querySelector('.gallery__cards');
 const popupAvatarBtn = document.querySelector('.profile__avatar-btn');
+const delBtnHidden = '.gallery__delete-btn_hidden';
 const galleryTemplate = document.querySelector('.gallery__template').content;
+// const likesQty = 
 const validationObj = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
@@ -43,9 +45,6 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-41/cards', {
   authorization: '1958a966-a982-4094-8b61-ad54c8ab2b4e',
 });
 
-
-console.log(api.getInitialCards())
-
 fullPhoto.setEventListeners();
 popupUser.setEventListeners();
 addCard.setEventListeners();
@@ -62,17 +61,17 @@ function newCardMaker(items) {
   const cardElement = card.generateCard();
   return cardElement;
 }
-
+;
 // отрисовка дефолтных карточек
-// const defaultCards = new Section(
-//   { items: api.getInitialCards().then, renderer: newCardMaker },
-//   galleryCards
-// );
-const defaultCards = new Section(
-  { items: initialCards, renderer: newCardMaker },
+const cards = api.getInitialCards();
+cards.then((data) => {
+  const defaultCards = new Section(
+  { items: data, renderer: newCardMaker },
   galleryCards
 );
 defaultCards.renderAll();
+})
+.catch((err) => { console.log(err) });
 
 //наложение валидации на все формы
 const formValidators = {};
@@ -96,12 +95,18 @@ function newCardSubmit(CardObj) {
 
 //обработчик submit формы пользователя
 function userFormSubmit(userData) {
+  api.setUserData(userData);
   userInfo.setUserInfo(userData);
-};
+}
 
 //обработчик submit формы изменения аватара
-function editAvatarSubmit() {
-  console.log('avatar edit');
+function editAvatarSubmit(avatarAdress) {
+  const avatar = avatarAdress
+  // console.log(avatar.avatarLink);
+  api.setUserAvatar(avatar.avatarLink)
+  .then((res) => {
+    profileImg.src = res.avatar;
+  });
 }
 
 //открытие popup профайла пользователя
@@ -128,7 +133,6 @@ popupAvatarBtn.addEventListener('click', () => {
 //отрисовка данных пользователя и карточек
 Promise.all([api.getUserData()])
   .then((userData) => {
-    console.log(userData);
     profileImg.src = userData[0].avatar;
       userInfo.setUserInfo({
         name: userData[0].name,
@@ -136,17 +140,3 @@ Promise.all([api.getUserData()])
       })
   })
   .catch((err) => console.log(err));
-
-// function userDataHandler(profileImg) {
-//   userInfo.setUserInfo(api.getUserData().then);
-//   console.log(api.getUserData());
-//   profileImg.src = api.getUserData.avatar;
-  // profileName.textContent = api.getUserData().name;
-  // profileJob.textContent = api.getUserData().about;
-// }
-
-// userDataHandler(profileImg);
-
-//  this._avatar.src = result.avatar;
-//  this._userName.textContent = result.name;
-//  this._userJob.textContent = result.about;

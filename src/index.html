@@ -15,20 +15,20 @@
         <button class="profile__avatar-btn">
         <img
           class="profile__avatar profile__avatar_opacity"
-          src="<%=require('./images/elbrus.jpg')%>"
+          src="<%=require('./images/user.png')%>"
           
           alt="Аватар пользователя"
         />
         </button>
         <div class="profile__info">
           <div class="profile__container">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name">пользователь</h1>
             <button
               class="profile__edit-btn btn-opacity"
               type="button"
             ></button>
           </div>
-          <p class="profile__job">Исследователь океана</p>
+          <p class="profile__job">профессия</p>
         </div>
         <button class="profile__add-btn btn-opacity" type="button"></button>
       </section>
@@ -36,7 +36,7 @@
         <ul class="gallery__cards">
           <template class="gallery__template">
             <li class="gallery__item">
-              <button class="gallery__delete-btn" type="button"></button>
+              <button class="gallery__delete-btn gallery__delete-btn_hidden" type="button"></button>
               <img
                 class="gallery__img"
                 src="#"
@@ -46,7 +46,7 @@
                 <h2 class="gallery__title"></h2>
                 <div class="gallery_like">
                 <button class="gallery__like-btn" type="button"></button>
-                <div class="gallery__like-qty">66</div>
+                <div class="gallery__like-qty">1</div>
                 </div>
               </div>
             </li>
@@ -79,7 +79,7 @@
             class="popup__field popup__field_newcard-adress popup__form-input"
             type="url"
             value=""
-            name="avatar-adress"
+            name="avatarLink"
             placeholder="Ссылка на картинку"
             required
             autocomplete="off"
