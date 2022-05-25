@@ -8,7 +8,6 @@ export default class PopupAvatar extends PopupWithForm {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._handlerFormSubmit();
       this.close();
     });
   }

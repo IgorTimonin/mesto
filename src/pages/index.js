@@ -25,7 +25,7 @@ const galleryCards = document.querySelector('.gallery__cards');
 const popupAvatarBtn = document.querySelector('.profile__avatar-btn');
 const delBtnHidden = '.gallery__delete-btn_hidden';
 const galleryTemplate = document.querySelector('.gallery__template').content;
-// const likesQty = 
+const apiUserUrl = 'https://nomoreparties.co/v1/cohort-41/users/me';
 const validationObj = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
@@ -43,6 +43,7 @@ const editAvatar = new PopupAvatar(popupAvatar, editAvatarSubmit);
 // const popupSubmit = new PopupWithSubmit(popup-submit,);
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-41/cards', {
   authorization: '1958a966-a982-4094-8b61-ad54c8ab2b4e',
+  'Content-Type': 'application/json',
 });
 
 fullPhoto.setEventListeners();
@@ -60,16 +61,16 @@ function newCardMaker(items) {
   const card = new Card(items, galleryTemplate, handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
-}
-;
+};
+
+
+const defaultCards = new Section(newCardMaker, galleryCards);
+
 // отрисовка дефолтных карточек
 const cards = api.getInitialCards();
 cards.then((data) => {
-  const defaultCards = new Section(
-  { items: data, renderer: newCardMaker },
-  galleryCards
-);
-defaultCards.renderAll();
+defaultCards.renderAll(data);
+
 })
 .catch((err) => { console.log(err) });
 
@@ -90,24 +91,32 @@ enableValidation(validationObj);
 
 //обработчик submit формы добавления карточки
 function newCardSubmit(CardObj) {
-  defaultCards.addItem(CardObj);
+  api
+    .setNewCard(CardObj)
+    .then((res) => {
+      defaultCards.addItem(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  
 }
 
 //обработчик submit формы пользователя
 function userFormSubmit(userData) {
-  api.setUserData(userData);
+  api.setUserData(apiUserUrl, userData);
   userInfo.setUserInfo(userData);
-}
+};
 
 //обработчик submit формы изменения аватара
-function editAvatarSubmit(avatarAdress) {
-  const avatar = avatarAdress
-  // console.log(avatar.avatarLink);
-  api.setUserAvatar(avatar.avatarLink)
-  .then((res) => {
-    profileImg.src = res.avatar;
-  });
-}
+function editAvatarSubmit(avatar) {
+  api
+    .setUserAvatar(apiUserUrl,avatar.avatarLink)
+    .then((res) => {
+      profileImg.src = res.avatar;
+    })
+    .catch((err) => console.log(err));
+};
 
 //открытие popup профайла пользователя
 profileBtn.addEventListener('click', () => {
@@ -131,12 +140,12 @@ popupAvatarBtn.addEventListener('click', () => {
 });
 
 //отрисовка данных пользователя и карточек
-Promise.all([api.getUserData()])
+Promise.all([api.getUserData(apiUserUrl)])
   .then((userData) => {
     profileImg.src = userData[0].avatar;
-      userInfo.setUserInfo({
-        name: userData[0].name,
-        about: userData[0].about,
-      })
+    userInfo.setUserInfo({
+      name: userData[0].name,
+      about: userData[0].about,
+    });
   })
   .catch((err) => console.log(err));

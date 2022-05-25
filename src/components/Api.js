@@ -2,50 +2,53 @@ const resultHandler = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject();
+  return Promise.reject(`Ошибка: ${res.status}`);
 };
 export default class Api {
   constructor(baseUrl, headers) {
-    (this.baseUrl = baseUrl), (this.headers = headers);
+    (this._baseUrl = baseUrl), (this._headers = headers);
   }
 
   getInitialCards() {
-    return fetch(this.baseUrl, {
-      headers: this.headers,
+    return fetch(this._baseUrl, {
+      headers: this._headers,
     }).then(resultHandler);
   }
 
-  getUserData() {
-    return fetch('https://nomoreparties.co/v1/cohort-41/users/me', {
-      headers: {
-        authorization: '1958a966-a982-4094-8b61-ad54c8ab2b4e',
-      },
+  getUserData(targetApiUrl) {
+    return fetch(targetApiUrl, {
+      headers: this._headers,
     }).then(resultHandler);
   }
 
-  setUserData(userData) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-41/users/me', {
+  setUserData(targetApiUrl, userData) {
+    return fetch(targetApiUrl, {
       method: 'PATCH',
-      headers: {
-        authorization: '1958a966-a982-4094-8b61-ad54c8ab2b4e',
-        'Content-Type': 'application/json',
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: userData.name,
-        about: userData.about
+        about: userData.about,
       }),
-    });
+    }).then(resultHandler);
   }
 
-  setUserAvatar(userData) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-41/users/me/avatar', {
+  setUserAvatar(targetApiUrl, userData) {
+    return fetch(targetApiUrl + '/avatar', {
       method: 'PATCH',
-      headers: {
-        authorization: '1958a966-a982-4094-8b61-ad54c8ab2b4e',
-        'Content-Type': 'application/json',
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: userData,
+      }),
+    }).then(resultHandler);
+  }
+
+  setNewCard(cardData) {
+    return fetch(this._baseUrl, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: cardData.cardName,
+        link: cardData.cardAdress,
       }),
     }).then(resultHandler);
   }
