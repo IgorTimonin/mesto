@@ -1,5 +1,5 @@
 import './index.css';
-import { initialCards } from '../components/initialCards.js';
+
 import Card from '../components/Card.js';
 import PopupAvatar from '../components/PopupAvatar';
 import Api from '../components/Api';
@@ -13,6 +13,8 @@ const popupProfile = document.querySelector('.popup-profile');
 const profileForm = document.querySelector('.popup__profile-form');
 const popupFullSize = document.querySelector('.popup_fullsize');
 const popupAddCard = document.querySelector('.popup-add-card');
+const popupWithSubmit = document.querySelector('.popup-submit');
+const submitBtn = popupWithSubmit.querySelector('.popup__form-submit');
 const newCardForm = popupAddCard.querySelector('.popup__newcard-form');
 const profileName = '.profile__name';
 const profileJob = '.profile__job';
@@ -23,9 +25,10 @@ const popupAvatar = document.querySelector('.popup__avatar');
 const avatarForm = popupAvatar.querySelector('.popup__avatar-form');
 const galleryCards = document.querySelector('.gallery__cards');
 const popupAvatarBtn = document.querySelector('.profile__avatar-btn');
-const delBtnHidden = '.gallery__delete-btn_hidden';
+const delBtnHidden = 'gallery__delete-btn_hidden';
 const galleryTemplate = document.querySelector('.gallery__template').content;
 const apiUserUrl = 'https://nomoreparties.co/v1/cohort-41/users/me';
+let userID = 'Новый ИД';
 const validationObj = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
@@ -40,39 +43,76 @@ const popupUser = new PopupWithForm(popupProfile, userFormSubmit);
 const addCard = new PopupWithForm(popupAddCard, newCardSubmit);
 const fullPhoto = new PopupWithImage(popupFullSize);
 const editAvatar = new PopupAvatar(popupAvatar, editAvatarSubmit);
-// const popupSubmit = new PopupWithSubmit(popup-submit,);
+const popupSubmit = new PopupWithSubmit(popupWithSubmit, submitBtn);
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-41/cards', {
   authorization: '1958a966-a982-4094-8b61-ad54c8ab2b4e',
   'Content-Type': 'application/json',
 });
 
+//отрисовка данных пользователя и карточек
+Promise.all([api.getUserData(apiUserUrl), api.getInitialCards()])
+  .then(([userData, cardData]) => {
+    profileImg.src = userData.avatar;
+    userID = userInfo.getMyId(userData._id);
+    userInfo.setUserInfo({
+      name: userData.name,
+      about: userData.about,
+    });
+    defaultCards.renderAll(cardData);
+  })
+  .catch((err) => console.log(err));
+
 fullPhoto.setEventListeners();
 popupUser.setEventListeners();
 addCard.setEventListeners();
 editAvatar.setEventListeners();
-// popupSubmit.setEventListeners();
-
-function handleCardClick() {
-  fullPhoto.open(this.src, this.alt);
-}
+popupSubmit.setEventListeners();
 
 //создание разметки карточки
-function newCardMaker(items) {
-  const card = new Card(items, galleryTemplate, handleCardClick);
+const newCardMaker = (items) => {
+  const cardData = {
+    items,
+    myID: userID,
+    delBtn: delBtnHidden,
+  };
+  const card = new Card(
+    {
+      cardData,
+      handleCardClick: () => {
+        // ...что должно произойти при клике на картинку
+        fullPhoto.open(items.link, items.name);
+      },
+      handleLikeClick: (card) => {
+        // ...что должно произойти при клике на лайк
+        api
+          .likeSwitcher(card.id, !card.isLiked())
+          .then((res) => {
+            card.updateCardStatus({ ...data });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      handleDeleteIconClick: (card) => {
+        // ...что должно произойти при клике на удаление
+        popupSubmit.open();
+        popupSubmit
+          .setActionSubmit(() => {
+            card.removeCard();
+            popupSubmit.close();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+    },
+    galleryTemplate
+  );
   const cardElement = card.generateCard();
   return cardElement;
 };
 
-
 const defaultCards = new Section(newCardMaker, galleryCards);
-
-// отрисовка дефолтных карточек
-const cards = api.getInitialCards();
-cards.then((data) => {
-defaultCards.renderAll(data);
-
-})
-.catch((err) => { console.log(err) });
 
 //наложение валидации на все формы
 const formValidators = {};
@@ -99,7 +139,6 @@ function newCardSubmit(CardObj) {
     .catch((err) => {
       console.log(err);
     });
-  
 }
 
 //обработчик submit формы пользователя
@@ -138,14 +177,3 @@ popupAvatarBtn.addEventListener('click', () => {
   editAvatar.open();
   formValidators[avatarForm.name].resetValidation();
 });
-
-//отрисовка данных пользователя и карточек
-Promise.all([api.getUserData(apiUserUrl)])
-  .then((userData) => {
-    profileImg.src = userData[0].avatar;
-    userInfo.setUserInfo({
-      name: userData[0].name,
-      about: userData[0].about,
-    });
-  })
-  .catch((err) => console.log(err));

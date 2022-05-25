@@ -16,4 +16,9 @@ export default class UserInfo {
     this._userName.textContent = userData.name;
     this._userInfo.textContent = userData.about;
   }
+
+  getMyId(id) {
+    const myID = id
+    return myID 
+  }
 }
