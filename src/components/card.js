@@ -29,7 +29,8 @@ export default class Card {
     const _imgLike = this._element.querySelector('.gallery__like-btn');
     _imgLike.addEventListener('click', this.handleLikeClick);
     this._galleryImg.addEventListener('click', this.handleCardClick);
-    this._deleteBtn.addEventListener('click', this.handleDeleteIconClick);
+    this._deleteBtn.addEventListener('click', () => {
+      this.handleDeleteIconClick(this._element)});
   }
 
   generateCard() {
@@ -46,10 +47,6 @@ export default class Card {
     this._galleryImg.alt = this._name;
     this._setEventListeners();
     return this._element;
-  }
-
-  removeCard() {
-    this._element.remove();
   }
 };
 

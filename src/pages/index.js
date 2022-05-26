@@ -96,18 +96,23 @@ const newCardMaker = (items) => {
       handleDeleteIconClick: (card) => {
         // ...что должно произойти при клике на удаление
         popupSubmit.open();
+        
         popupSubmit
-          .setActionSubmit(() => {
-            card.removeCard();
+          .setActionSubmit = (() => {
+            api.deleteCard(items._id).then(() => {
+            card.remove();
             popupSubmit.close();
-          })
-          .catch((err) => {
+            })
+            .catch((err) => {
             console.log(err);
           });
+          })
+          
       },
     },
     galleryTemplate
   );
+  // console.log(card);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -128,6 +133,15 @@ const enableValidation = (validationObj) => {
 };
 
 enableValidation(validationObj);
+
+//функция ожидания загрузки
+function renderLoading(isLoading) {
+  if (isLoading) {
+    loading.classList.add('spinner_visible');
+  } else {
+    loading.classList.remove('spinner_visible');
+  }
+}
 
 //обработчик submit формы добавления карточки
 function newCardSubmit(CardObj) {

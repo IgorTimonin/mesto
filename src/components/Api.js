@@ -52,4 +52,11 @@ export default class Api {
       }),
     }).then(resultHandler);
   }
+
+  deleteCard(cardId) {
+    return fetch(this._baseUrl + `/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    }).then(resultHandler);
+  }
 }
