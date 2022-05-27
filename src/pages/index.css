@@ -38,7 +38,7 @@
 @import url(../blocks/input-error/_active/input-error_active.css);
 @import url(../blocks/input_type_error/input_type_error.css);
 @import url(../blocks/profile/__avatar/_opacity/profile__avatar_opacity.css);
-@import url(../blocks/profile/__avatar/_btn/profile__avatar_btn.css);
+@import url(../blocks/profile/__avatar-btn/profile__avatar-btn.css);
 @import url(../blocks/gallery/__like/gallery_like.css);
 @import url(../blocks/gallery/__like/__like-qty/gallery__like-qty.css);
 

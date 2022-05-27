@@ -20,10 +20,10 @@ const profileJob = '.profile__job';
 const newCardBtn = document.querySelector('.profile__add-btn');
 const profileBtn = document.querySelector('.profile__edit-btn');
 const profileImg = document.querySelector('.profile__avatar');
-const popupAvatar = document.querySelector('.popup__avatar');
+const popupAvatar = document.querySelector('.popup-avatar');
 const avatarForm = popupAvatar.querySelector('.popup__avatar-form');
 const galleryCards = document.querySelector('.gallery__cards');
-const popupAvatarBtn = document.querySelector('.profile__avatar_btn');
+const popupAvatarBtn = document.querySelector('.profile__avatar-btn');
 const delBtnHidden = 'gallery__delete-btn_hidden';
 
 const savingText = 'Сохранение...';

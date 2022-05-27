@@ -1,4 +1,4 @@
-.profile__avatar_btn {
+.profile__avatar-btn {
   margin-right: 30px;
   padding: 0;
   border: none;
@@ -7,7 +7,7 @@
   background-color: transparent;
 }
 
-.profile__avatar_btn:hover {
+.profile__avatar-btn:hover {
   background-image: url(/src/images/vector.svg);
   background-repeat: no-repeat;
   background-position: center;
