@@ -73,10 +73,8 @@ popupSubmit.setEventListeners();
 function renderLoading(isLoading, btnObj) {
   if (isLoading) {
     btnObj.submitBtn.textContent = savingText;
-    // loading.classList.add('saving_visible');
   } else {
     btnObj.submitBtn.textContent = btnObj.btnText;
-    // loading.classList.remove('saving_visible');
   }
 }
 
@@ -91,23 +89,19 @@ const newCardMaker = (items) => {
     {
       cardData,
       handleCardClick: () => {
-        // ...что должно произойти при клике на картинку
         fullPhoto.open(items.link, items.name);
       },
       handleLikeClick: (card) => {
-        // ...что должно произойти при клике на лайк
         api
           .likeSwitcher(items._id, card.isLiked())
           .then((res) => {
             card.updateLikes(res);
-            // card.likeIconSwitcher(cardData.isLiked);
           })
           .catch((err) => {
             console.log(err);
           });
       },
       handleDeleteIconClick: (card) => {
-        // ...что должно произойти при клике на удаление
         popupSubmit.open();
         popupSubmit.setActionSubmit = () => {
           const btnText = submitBtn.textContent;
