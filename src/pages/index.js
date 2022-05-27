@@ -26,6 +26,8 @@ const avatarForm = popupAvatar.querySelector('.popup__avatar-form');
 const galleryCards = document.querySelector('.gallery__cards');
 const popupAvatarBtn = document.querySelector('.profile__avatar-btn');
 const delBtnHidden = 'gallery__delete-btn_hidden';
+
+const savingText = 'Сохранение...'
 const galleryTemplate = document.querySelector('.gallery__template').content;
 const apiUserUrl = 'https://nomoreparties.co/v1/cohort-41/users/me';
 let userID = 'Новый ИД';
@@ -84,30 +86,26 @@ const newCardMaker = (items) => {
       },
       handleLikeClick: (card) => {
         // ...что должно произойти при клике на лайк
-        api
-          .likeSwitcher(card.id, !card.isLiked())
-          .then((res) => {
-            card.updateCardStatus({ ...data });
-          })
-          .catch((err) => {
+        api.likeSwitcher(items._id, card.isLiked()).then((res) => {
+          card.updateLikes(res);
+          // card.likeIconSwitcher(cardData.isLiked);
+        })
+        .catch((err) => {
             console.log(err);
           });
       },
       handleDeleteIconClick: (card) => {
         // ...что должно произойти при клике на удаление
         popupSubmit.open();
-        
-        popupSubmit
-          .setActionSubmit = (() => {
-            api.deleteCard(items._id).then(() => {
-            card.remove();
-            popupSubmit.close();
-            })
-            .catch((err) => {
-            console.log(err);
-          });
+        popupSubmit.setActionSubmit = (() => {
+          api.deleteCard(items._id).then(() => {
+          card.remove();
+          popupSubmit.close();
           })
-          
+          .catch((err) => {
+          console.log(err);
+          });
+        })
       },
     },
     galleryTemplate
@@ -135,16 +133,21 @@ const enableValidation = (validationObj) => {
 enableValidation(validationObj);
 
 //функция ожидания загрузки
-function renderLoading(isLoading) {
+function renderLoading(isLoading, btn) {
+  const defaultText = this.textContent;
   if (isLoading) {
-    loading.classList.add('spinner_visible');
+    ;
+    btn.textContent = savingText;
+    // loading.classList.add('saving_visible');
   } else {
-    loading.classList.remove('spinner_visible');
+    btn.textContent = defaultText;
+    // loading.classList.remove('saving_visible');
   }
 }
 
 //обработчик submit формы добавления карточки
 function newCardSubmit(CardObj) {
+  renderLoading(true, newCardBtn);
   api
     .setNewCard(CardObj)
     .then((res) => {
@@ -152,6 +155,9 @@ function newCardSubmit(CardObj) {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, newCardBtn);
     });
 }
 
