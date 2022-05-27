@@ -1,5 +1,4 @@
 import './index.css';
-
 import Card from '../components/Card.js';
 import PopupAvatar from '../components/PopupAvatar';
 import Api from '../components/Api';
@@ -24,10 +23,10 @@ const profileImg = document.querySelector('.profile__avatar');
 const popupAvatar = document.querySelector('.popup__avatar');
 const avatarForm = popupAvatar.querySelector('.popup__avatar-form');
 const galleryCards = document.querySelector('.gallery__cards');
-const popupAvatarBtn = document.querySelector('.profile__avatar-btn');
+const popupAvatarBtn = document.querySelector('.profile__avatar_btn');
 const delBtnHidden = 'gallery__delete-btn_hidden';
 
-const savingText = 'Сохранение...'
+const savingText = 'Сохранение...';
 const galleryTemplate = document.querySelector('.gallery__template').content;
 const apiUserUrl = 'https://nomoreparties.co/v1/cohort-41/users/me';
 let userID = 'Новый ИД';
@@ -97,25 +96,26 @@ const newCardMaker = (items) => {
       },
       handleLikeClick: (card) => {
         // ...что должно произойти при клике на лайк
-        api.likeSwitcher(items._id, card.isLiked()).then((res) => {
-          card.updateLikes(res);
-          // card.likeIconSwitcher(cardData.isLiked);
-        })
-        .catch((err) => {
+        api
+          .likeSwitcher(items._id, card.isLiked())
+          .then((res) => {
+            card.updateLikes(res);
+            // card.likeIconSwitcher(cardData.isLiked);
+          })
+          .catch((err) => {
             console.log(err);
           });
       },
       handleDeleteIconClick: (card) => {
         // ...что должно произойти при клике на удаление
         popupSubmit.open();
-        popupSubmit.setActionSubmit = (() => {
+        popupSubmit.setActionSubmit = () => {
           const btnText = submitBtn.textContent;
           renderLoading(true, { btnText, submitBtn });
           api
             .deleteCard(items._id)
             .then(() => {
               card.remove();
-              
             })
             .catch((err) => {
               console.log(err);
@@ -124,7 +124,7 @@ const newCardMaker = (items) => {
               renderLoading(false, { btnText, submitBtn });
               popupSubmit.close();
             });
-        })
+        };
       },
     },
     galleryTemplate
@@ -152,7 +152,6 @@ enableValidation(validationObj);
 
 //обработчик submit формы добавления карточки
 function newCardSubmit(CardObj) {
-  console.log(this);
   const submitBtn = this.submitBtn;
   const btnText = submitBtn.textContent;
   renderLoading(true, { btnText, submitBtn });
@@ -172,19 +171,37 @@ function newCardSubmit(CardObj) {
 
 //обработчик submit формы пользователя
 function userFormSubmit(userData) {
-  api.setUserData(apiUserUrl, userData);
+  const submitBtn = this.submitBtn;
+  const btnText = submitBtn.textContent;
+  renderLoading(true, { btnText, submitBtn });
+  api
+    .setUserData(apiUserUrl, userData)
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, { btnText, submitBtn });
+      this.close();
+    });
   userInfo.setUserInfo(userData);
-};
+}
 
 //обработчик submit формы изменения аватара
 function editAvatarSubmit(avatar) {
+  const submitBtn = this.submitBtn;
+  const btnText = submitBtn.textContent;
+  renderLoading(true, { btnText, submitBtn });
   api
-    .setUserAvatar(apiUserUrl,avatar.avatarLink)
+    .setUserAvatar(apiUserUrl, avatar.avatarLink)
     .then((res) => {
       profileImg.src = res.avatar;
     })
-    .catch((err) => console.log(err));
-};
+    .catch((err) => console.log(err))
+    .finally(() => {
+      renderLoading(false, { btnText, submitBtn });
+      this.close();
+    });
+}
 
 //открытие popup профайла пользователя
 profileBtn.addEventListener('click', () => {

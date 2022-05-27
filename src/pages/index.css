@@ -37,45 +37,17 @@
 @import url(../blocks/input-error/input-error.css);
 @import url(../blocks/input-error/_active/input-error_active.css);
 @import url(../blocks/input_type_error/input_type_error.css);
+@import url(../blocks/profile/__avatar/_opacity/profile__avatar_opacity.css);
+@import url(../blocks/profile/__avatar/_btn/profile__avatar_btn.css);
+@import url(../blocks/gallery/__like/gallery_like.css);
+@import url(../blocks/gallery/__like/__like-qty/gallery__like-qty.css);
 
 
-.gallery__like-qty {
-  margin: 3px 0 0 0;
-  font-family: "Inter", "Arial", "Helvetica", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 16px;
-  text-align: center;
-  color: #000000;
-  align-self: center;
-}
 
-.gallery_like {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  flex-wrap: nowrap;
-}
 
-.profile__avatar-btn {
-  margin-right: 30px;
-  padding: 0;
-  border: none;
-  font: inherit;
-  color: inherit;
-  background-color: transparent;
-}
 
-.profile__avatar-btn:hover {
-  background-image: url(/src/images/vector.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-}
 
-.profile__avatar_opacity:hover {
-  opacity: 0.2;
-  cursor: pointer;
-  transition: linear 0.3s;
-}
+
+
+
 

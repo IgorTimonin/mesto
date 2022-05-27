@@ -62,19 +62,15 @@ export default class Api {
 
   likeSwitcher(cardId, isLiked) {
     if (isLiked) {
-      // delLike = (cardId) => {
       return fetch(this._baseUrl + `/${cardId}/likes`, {
         method: 'DELETE',
         headers: this._headers,
       }).then(resultHandler);
-      // }
     } else {
-      // putLike(cardId) {
       return fetch(this._baseUrl + `/${cardId}/likes`, {
         method: 'PUT',
         headers: this._headers,
       }).then(resultHandler);
     }
   }
-  //  };
 }

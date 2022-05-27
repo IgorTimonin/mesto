@@ -31,11 +31,10 @@ export default class Card {
   }
 
   isLiked = () => {
-    return this._likes.some((liked) => liked._id == this._myID)
+    return this._likes.some((liked) => liked._id == this._myID);
   };
 
   _setEventListeners() {
-    
     this._imgLike.addEventListener('click', () => this.handleLikeClick(this));
     this._galleryImg.addEventListener('click', this.handleCardClick);
     this._deleteBtn.addEventListener('click', () => {
@@ -45,16 +44,15 @@ export default class Card {
 
   updateLikes(card) {
     this._likesQty.textContent = card.likes.length;
-    this._likes = card.likes
+    this._likes = card.likes;
     if (this.isLiked()) {
       this._imgLike.classList.add('gallery__like-btn_active');
     } else {
       this._imgLike.classList.remove('gallery__like-btn_active');
-    };
+    }
   }
 
   generateCard() {
-    
     this._deleteBtn = this._element.querySelector('.gallery__delete-btn');
     if (this._myID === this._ownerId) {
       this._deleteBtn.classList.remove(this._delBtnHidden);
@@ -69,44 +67,4 @@ export default class Card {
     this._setEventListeners();
     return this._element;
   }
-};
-
-// constructor(data, template, handleCardClick) {
-//     this._name = data.name;
-//     this._image = data.link;
-//     this._likes = data.likes;
-//     this._galleryTemplate = template;
-//     this.handleCardClick = handleCardClick;
-//   }
-
-//   _getTemplate() {
-//     const _galleryItem = this._galleryTemplate
-//       .cloneNode(true)
-//       .querySelector('.gallery__item');
-//     return _galleryItem;
-//   }
-
-//   _setEventListeners() {
-//     const _imgLike = this._element.querySelector('.gallery__like-btn');
-//     _imgLike.addEventListener('click', () => {
-//       _imgLike.classList.toggle('gallery__like-btn_active');
-//     });
-//     this._galleryImg.addEventListener('click', this.handleCardClick);
-//     const _deleteBtn = this._element.querySelector('.gallery__delete-btn');
-//     _deleteBtn.addEventListener('click', () => {
-//       this._element.remove();
-//     });
-//   }
-
-//   generateCard() {
-//     this._element = this._getTemplate();
-//     this._galleryImg = this._element.querySelector('.gallery__img');
-//     this._likesQty = this._element.querySelector('.gallery__like-qty');
-//     this._galleryImg.src = this._image;
-//     this._galleryImg.alt = this._name;
-//     this._likesQty.textContent = this._likes.length;
-//     this._element.querySelector('.gallery__title').textContent = this._name;
-//     this._setEventListeners();
-//     return this._element;
-//   }
-// };
+}
