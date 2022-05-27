@@ -70,6 +70,17 @@ addCard.setEventListeners();
 editAvatar.setEventListeners();
 popupSubmit.setEventListeners();
 
+//функция ожидания загрузки
+function renderLoading(isLoading, btnObj) {
+  if (isLoading) {
+    btnObj.submitBtn.textContent = savingText;
+    // loading.classList.add('saving_visible');
+  } else {
+    btnObj.submitBtn.textContent = btnObj.btnText;
+    // loading.classList.remove('saving_visible');
+  }
+}
+
 //создание разметки карточки
 const newCardMaker = (items) => {
   const cardData = {
@@ -98,19 +109,26 @@ const newCardMaker = (items) => {
         // ...что должно произойти при клике на удаление
         popupSubmit.open();
         popupSubmit.setActionSubmit = (() => {
-          api.deleteCard(items._id).then(() => {
-          card.remove();
-          popupSubmit.close();
-          })
-          .catch((err) => {
-          console.log(err);
-          });
+          const btnText = submitBtn.textContent;
+          renderLoading(true, { btnText, submitBtn });
+          api
+            .deleteCard(items._id)
+            .then(() => {
+              card.remove();
+              
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+            .finally(() => {
+              renderLoading(false, { btnText, submitBtn });
+              popupSubmit.close();
+            });
         })
       },
     },
     galleryTemplate
   );
-  // console.log(card);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -132,22 +150,12 @@ const enableValidation = (validationObj) => {
 
 enableValidation(validationObj);
 
-//функция ожидания загрузки
-function renderLoading(isLoading, btn) {
-  const defaultText = this.textContent;
-  if (isLoading) {
-    ;
-    btn.textContent = savingText;
-    // loading.classList.add('saving_visible');
-  } else {
-    btn.textContent = defaultText;
-    // loading.classList.remove('saving_visible');
-  }
-}
-
 //обработчик submit формы добавления карточки
 function newCardSubmit(CardObj) {
-  renderLoading(true, newCardBtn);
+  console.log(this);
+  const submitBtn = this.submitBtn;
+  const btnText = submitBtn.textContent;
+  renderLoading(true, { btnText, submitBtn });
   api
     .setNewCard(CardObj)
     .then((res) => {
@@ -157,7 +165,8 @@ function newCardSubmit(CardObj) {
       console.log(err);
     })
     .finally(() => {
-      renderLoading(false, newCardBtn);
+      renderLoading(false, { btnText, submitBtn });
+      this.close();
     });
 }
 
