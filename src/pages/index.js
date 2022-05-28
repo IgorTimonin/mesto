@@ -1,5 +1,5 @@
 import './index.css';
-import validationObj from '../utils/constants'; 
+import {validationObj} from '../utils/constants'; 
 import Card from '../components/Card.js';
 import Api from '../components/Api';
 import PopupWithSubmit from '../components/PopupWithSubmit';
