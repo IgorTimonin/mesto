@@ -1,6 +1,6 @@
 import './index.css';
+import { validationObj } from '../utils/validationObj'; 
 import Card from '../components/Card.js';
-import PopupAvatar from '../components/PopupAvatar';
 import Api from '../components/Api';
 import PopupWithSubmit from '../components/PopupWithSubmit';
 import Section from '../components/Section.js';
@@ -25,25 +25,19 @@ const avatarForm = popupAvatar.querySelector('.popup__avatar-form');
 const galleryCards = document.querySelector('.gallery__cards');
 const popupAvatarBtn = document.querySelector('.profile__avatar-btn');
 const delBtnHidden = 'gallery__delete-btn_hidden';
-
 const savingText = 'Сохранение...';
 const galleryTemplate = document.querySelector('.gallery__template').content;
 const apiUserUrl = 'https://nomoreparties.co/v1/cohort-41/users/me';
 let userID = 'Новый ИД';
-const validationObj = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__form-input',
-  submitButtonSelector: '.popup__form-submit',
-  inactiveButtonClass: 'popup__form_submit_inactive',
-  inputErrorClass: 'input_type_error',
-  activeErrorClass: 'input-error_active',
-};
 
-const userInfo = new UserInfo({ userName: profileName, userInfo: profileJob });
+const userInfo = new UserInfo(
+  { userName: profileName, userInfo: profileJob },
+  profileImg
+);
 const popupUser = new PopupWithForm(popupProfile, userFormSubmit);
 const addCard = new PopupWithForm(popupAddCard, newCardSubmit);
 const fullPhoto = new PopupWithImage(popupFullSize);
-const editAvatar = new PopupAvatar(popupAvatar, editAvatarSubmit);
+const editAvatar = new PopupWithForm(popupAvatar, editAvatarSubmit);
 const popupSubmit = new PopupWithSubmit(popupWithSubmit, submitBtn);
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-41/cards', {
   authorization: '1958a966-a982-4094-8b61-ad54c8ab2b4e',
@@ -53,7 +47,8 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-41/cards', {
 //отрисовка данных пользователя и карточек
 Promise.all([api.getUserData(apiUserUrl), api.getInitialCards()])
   .then(([userData, cardData]) => {
-    profileImg.src = userData.avatar;
+    // profileImg.src = userData.avatar;
+    userInfo.setAvatar(userData)
     userID = userInfo.getMyId(userData._id);
     userInfo.setUserInfo({
       name: userData.name,
@@ -101,7 +96,7 @@ const newCardMaker = (items) => {
             console.log(err);
           });
       },
-      handleDeleteIconClick: (card) => {
+      handleDeleteIconClick: (cardElement) => {
         popupSubmit.open();
         popupSubmit.setActionSubmit = () => {
           const btnText = submitBtn.textContent;
@@ -109,14 +104,15 @@ const newCardMaker = (items) => {
           api
             .deleteCard(items._id)
             .then(() => {
-              card.remove();
+            card.deleteCard(cardElement);
+            popupSubmit.close();
             })
             .catch((err) => {
               console.log(err);
             })
             .finally(() => {
               renderLoading(false, { btnText, submitBtn });
-              popupSubmit.close();
+              
             });
         };
       },
@@ -145,21 +141,21 @@ const enableValidation = (validationObj) => {
 enableValidation(validationObj);
 
 //обработчик submit формы добавления карточки
-function newCardSubmit(CardObj) {
+function newCardSubmit(cardObj) {
   const submitBtn = this.submitBtn;
   const btnText = submitBtn.textContent;
   renderLoading(true, { btnText, submitBtn });
   api
-    .setNewCard(CardObj)
+    .setNewCard(cardObj)
     .then((res) => {
       defaultCards.addItem(res);
+      this.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       renderLoading(false, { btnText, submitBtn });
-      this.close();
     });
 }
 
@@ -170,12 +166,14 @@ function userFormSubmit(userData) {
   renderLoading(true, { btnText, submitBtn });
   api
     .setUserData(apiUserUrl, userData)
+    .then(() => {
+      this.close();
+    })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       renderLoading(false, { btnText, submitBtn });
-      this.close();
     });
   userInfo.setUserInfo(userData);
 }
@@ -188,12 +186,12 @@ function editAvatarSubmit(avatar) {
   api
     .setUserAvatar(apiUserUrl, avatar.avatarLink)
     .then((res) => {
-      profileImg.src = res.avatar;
+      userInfo.setAvatar(res);
+      this.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
       renderLoading(false, { btnText, submitBtn });
-      this.close();
     });
 }
 

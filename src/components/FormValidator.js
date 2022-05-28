@@ -80,4 +80,4 @@ export default class FormValidator {
       this.buttonElement.removeAttribute('disabled', 'disabled');
     }
   };
-};
+}

@@ -1,4 +1,4 @@
-const resultHandler = (res) => {
+export const resultHandler = (res) => {
   if (res.ok) {
     return res.json();
   }
