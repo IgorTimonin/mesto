@@ -1,5 +1,5 @@
 import './index.css';
-import { validationObj } from '../utils/validationObj'; 
+import validationObj from '../utils/constants'; 
 import Card from '../components/Card.js';
 import Api from '../components/Api';
 import PopupWithSubmit from '../components/PopupWithSubmit';
@@ -47,7 +47,6 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-41/cards', {
 //отрисовка данных пользователя и карточек
 Promise.all([api.getUserData(apiUserUrl), api.getInitialCards()])
   .then(([userData, cardData]) => {
-    // profileImg.src = userData.avatar;
     userInfo.setAvatar(userData)
     userID = userInfo.getMyId(userData._id);
     userInfo.setUserInfo({
@@ -112,7 +111,6 @@ const newCardMaker = (items) => {
             })
             .finally(() => {
               renderLoading(false, { btnText, submitBtn });
-              
             });
         };
       },

@@ -1,4 +1,4 @@
-export const validationObj = {
+const validationObj = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
   submitButtonSelector: '.popup__form-submit',
@@ -6,3 +6,5 @@ export const validationObj = {
   inputErrorClass: 'input_type_error',
   activeErrorClass: 'input-error_active',
 };
+
+export {validationObj}
